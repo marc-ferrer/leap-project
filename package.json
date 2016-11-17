@@ -1,0 +1,23 @@
+{
+  "name": "leap-project",
+  "version": "0.0.1",
+  "description": "Leap project TBD",
+  "main": "index.html",
+  "dependencies": {
+    "leapjs": "^0.6.4",
+    "three": "^0.82.1"
+  },
+  "devDependencies": {
+    "jslint": "^0.10.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "leapmotion",
+    "three",
+    "vr"
+  ],
+  "author": "mark.mff@gmail.com",
+  "license": "ISC"
+}
