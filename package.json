@@ -7,6 +7,7 @@
     "express": "^4.14.0",
     "leapjs": "^0.6.4",
     "leapjs-plugins": "^0.1.12",
+    "phaser": "^2.6.2",
     "three": "^0.82.1"
   },
   "devDependencies": {
