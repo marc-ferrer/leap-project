@@ -4,6 +4,7 @@
   "description": "Leap project TBD",
   "main": "index.html",
   "dependencies": {
+    "express": "^4.14.0",
     "leapjs": "^0.6.4",
     "leapjs-plugins": "^0.1.12",
     "three": "^0.82.1"
