@@ -112,8 +112,28 @@ function animate2(frame) {
 	}
 }
 
+let handUpstarted = false;
 function onFrame(frame) {
 	// TODO: Program frame filtering here
+	if (frame.hands && frame.hands.length === 1) {
+		// console.log(`Frame id: ${frame.id} hand: `, frame.hands[0]);
+		const capturedHand = frame.hands[0];
+		if (capturedHand.palmNormal[2] < -0.33 && !handUpstarted) {
+			console.log(`Starting new gesture in frame: ${frame.id}`);
+			handUpstarted = true;
+			const upEvent = new CustomEvent('handUp', {
+				hand: capturedHand
+			});
+			window.dispatchEvent(upEvent);
+		}
+		if (capturedHand.palmNormal[2] > -0.33 && handUpstarted) {
+			handUpstarted = false;
+			const downEvent = new CustomEvent('handDown', {
+				hand: capturedHand
+			});
+			window.dispatchEvent(downEvent);
+		}
+	}
 }
 
 controller.on('frame', onFrame);
@@ -124,6 +144,36 @@ controller.on('frame', onFrame);
 	// stats.update();
 	renderer.render(scene, camera);
 }*/
+function getHand() {
+	const frame = controller.frame();
+	if (frame.hands && frame.hands.length === 1) {
+		return frame.hands[0]
+	}else {
+		return null;
+	}
+}
+
+window.onkeydown = (e) => {
+	// console.log(String.fromCharCode(e.keyCode)+" --> "+e.keyCode);
+	switch (e.keyCode) {
+		case 72:
+			const hand = getHand();
+			console.log(hand);
+			break;
+		case 68:
+			const hnd = getHand();
+			if (hnd) {
+				console.log(hnd.palmNormal);
+			}else {
+				console.log('Hand not available');
+			}
+			break;
+		default:
+			console.log('Unrecognized key', String.fromCharCode(e.keyCode));
+	}
+};
+
+
 
 // TODO: enable pause feature
 function togglePause() {
