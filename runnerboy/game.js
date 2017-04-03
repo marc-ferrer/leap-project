@@ -1,3 +1,5 @@
+import {Star, StarRewards} from '../lib/rewards.js'
+
 const WIDTH = 640;
 const HEIGHT = 480;
 const GAME_CONTAINER_ID = 'runner-window';
@@ -7,21 +9,6 @@ let game;
 let player;
 let platforms;
 let cursors;
-
-class Star extends Phaser.Sprite{
-  constructor(game, x, y) {
-    super(game, x, y, 'star');
-    this.sprite = 'star';
-  }
-}
-
-class StarRewards extends Phaser.Group{
-  constructor(game) {
-    super(game, game.world, 'star group', false, true, Phaser.Physics.ARCADE);
-    // this.create(300, 350, 'star');
-    this.add(new Star(game, 300, 350));
-  }
-}
 
 class PhaserGame {
   constructor() {
