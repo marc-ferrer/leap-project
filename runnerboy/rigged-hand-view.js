@@ -30,9 +30,19 @@ init();
 const controller = new Leap.Controller();
 window.controller = controller;
 // Leap.loopController.setBackground(true);
-controller.use('handHold').use('transform', {
+controller
+.use('handHold').use('transform', {
 	position: new THREE.Vector3(1, 0, 0)
-}).use('handEntry').use('screenPosition').use('riggedHand', {
+})
+.use('handEntry')
+.use('screenPosition')
+// .use('playback', {recording: 'demo.json'})
+.use('playback', {
+  loop: false,
+  pauseHotkey: false,
+  pauseOnHand: false
+})
+.use('riggedHand', {
 	parent: scene,
 	renderer: renderer,
 	// scale: getParam('scale'),
@@ -64,6 +74,33 @@ controller.use('handHold').use('transform', {
 	},
 	checkWebGL: true
 }).connect();
+
+const player = window.controller.plugins.playback.player;
+window.player = player;
+
+// This will start a recording sesion automatically when the Leap controller
+// starts sending data.
+controller.on('streamingStarted', () => {
+	console.log('streamingStarted event received');
+	player.record();
+});
+
+controller.on('playback.record', player => {
+	// Playback plugin started recording the Leap session.
+	console.log('playback.record event received', player);
+});
+
+controller.on('playback.recordingFinished', player => {
+	// Playback plugin stoped recording Leap session.
+	console.log('playback.recordingFinished event received', player);
+	// We have two options here:
+	// 1 :- include an script to define a global function 'saveAs' and save the file
+	// 			a prompt could be displayed to ask user.
+	//
+	// 2 :- Send the recording object (player.recording) to a server
+	//			where the data would be processed to update the pacient history & improvement.
+});
+
 function init() {
 	let geometry, material;
 

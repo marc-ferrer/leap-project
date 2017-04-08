@@ -133,6 +133,8 @@ class PhaserGame {
       if (starsHit) {
         console.log(starsHit);
         // star.remove();
+        // TODO: remove star and add a temporary sprite to indicate that you
+        //        have earned an star. Maybe an small explosion.
       }
     });
     // console.log('stars: ', this.stars.getAll());
@@ -172,11 +174,8 @@ class PhaserGame {
     window.addEventListener('handUp', () => {
       console.log('Hand Up event received');
       let hitPlatform = this.physics.arcade.collide(this.player, this.platforms);
-      console.log('hitPlatform', hitPlatform);
-      console.log('Body touching down: ', this.player.body.touching.down);
       // TODO: hitPlatform is never evaluated as true here, why?
       if (this.player.body.touching.down) {
-        console.log('Player should move up');
         this.player.body.velocity.y = -350;
       }
     });
