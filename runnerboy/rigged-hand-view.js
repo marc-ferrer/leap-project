@@ -92,10 +92,12 @@ controller.on('playback.record', player => {
 
 controller.on('playback.recordingFinished', player => {
 	// Playback plugin stoped recording Leap session.
-	console.log('playback.recordingFinished event received', player);
+	console.log('playback.recordingFinished event received');
+	console.log('player recording options', player.recording.metadata);
 	// We have two options here:
 	// 1 :- include an script to define a global function 'saveAs' and save the file
 	// 			a prompt could be displayed to ask user.
+	// player.recording.save('json');
 	//
 	// 2 :- Send the recording object (player.recording) to a server
 	//			where the data would be processed to update the pacient history & improvement.
