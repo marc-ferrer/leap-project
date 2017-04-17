@@ -22,7 +22,7 @@ class PhaserGame {
   }
 
   init() {
-    this.world.resize(WIDTH * 3, HEIGHT);
+    this.world.resize(WIDTH * 2, HEIGHT);
   }
 
   preload () {
@@ -33,6 +33,8 @@ class PhaserGame {
     this.load.image('ground', 'assets/platform.png');
     this.load.image('star', 'assets/star.png');
     this.load.spritesheet('dude', 'assets/dude.png', 32, 48);
+
+    this.load.bitmapFont('shmupfont', 'assets/shmupfont.png', 'assets/shmupfont.xml');
   }
 
   create () {
@@ -57,11 +59,10 @@ class PhaserGame {
 
     //  The platforms group contains the ground and the 2 ledges we can jump on
     this.platforms = this.add.group();
-    // this.stars = this.add.group();
+
     this.stars = new StarRewards(this);
     //  Enable physics for objects created in this group
     this.platforms.enableBody = true;
-    this.stars.enableBody = true;
     // Here we create the ground.
     let ground = this.platforms.create(
       0, this.world.height - 64, 'ground');
@@ -71,16 +72,9 @@ class PhaserGame {
     ground.body.immovable = true;
     ground.fixedToCamera = true;
 
-    //  Now let's create two ledges
-    /*let ledge = this.platforms.create(300, 300, 'ground');
-    ledge.body.immovable = true;
-    ledge.angle = 90;
-
-    ledge = this.platforms.create(-120, 180, 'ground');
-    ledge.body.immovable = true;*/
-    this.stars.create(WIDTH + 50, 300, 'star');
-
-
+    this.add.bitmapText(WIDTH - 170, 5, 'shmupfont', "Score: ", 18);
+    // TODO: change font since this one does not provide numbers
+    this.scoreText = this.add.bitmapText(300, 300, 'shmupfont', "0000", 18);
 
     //---------------------------------------------------//
     //--------------------- PLAYER ----------------------//
@@ -107,7 +101,8 @@ class PhaserGame {
 
     this.enableHandControlls();
 
-    // this.starsSequence();
+    this.starsSequence();
+    this.stars.addReward(WIDTH + 50, 300);
   }
 
   update() {
@@ -123,21 +118,6 @@ class PhaserGame {
       this.player.play('right');
       this.facing = 'right';
     }
-
-    this.stars.forEach(star => {
-      if (!star.alive) {
-        console.log('Star is not alive');
-      }
-      star.position.x -= 1;
-      const starsHit = this.physics.arcade.collide(this.player, star);
-      if (starsHit) {
-        console.log(starsHit);
-        // star.remove();
-        // TODO: remove star and add a temporary sprite to indicate that you
-        //        have earned an star. Maybe an small explosion.
-      }
-    });
-    // console.log('stars: ', this.stars.getAll());
 
     //  Reset the players velocity (movement)
     // simple controls commented
@@ -190,7 +170,7 @@ class PhaserGame {
     //  Set-up a simple repeating timer
     //game.time.events.repeat(Phaser.Timer.SECOND, 20, resurrect, this);
     this.starsTimer = this.time.events.loop(Phaser.Timer.SECOND * 5, () => {
-      this.stars.create(WIDTH + 50, 300, 'star');
+      this.stars.addReward(WIDTH + 50, 300);
     }, this);
   }
 }
