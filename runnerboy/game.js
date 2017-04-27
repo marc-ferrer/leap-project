@@ -4,6 +4,7 @@ const WIDTH = 640;
 const HEIGHT = 480;
 const GAME_CONTAINER_ID = 'runner-window';
 const GRAVITY = 500;
+const STARS_INTERVAL = 2;
 
 let game;
 let player;
@@ -11,7 +12,18 @@ let platforms;
 let cursors;
 
 class PhaserGame {
+
+  static padScore(score) {
+    let textScore = '0' + score;
+
+    if (textScore.length > 3) {
+      textScore = textScore.substr(1);
+    }
+    return textScore;
+  }
+
   constructor() {
+    this.score = 0;
     this.player = null;
     this.platforms = [];
     this.stars = [];
@@ -33,8 +45,9 @@ class PhaserGame {
     this.load.image('ground', 'assets/platform.png');
     this.load.image('star', 'assets/star.png');
     this.load.spritesheet('dude', 'assets/dude.png', 32, 48);
+    this.load.image('flare', 'assets/flare.png');
 
-    this.load.bitmapFont('shmupfont', 'assets/shmupfont.png', 'assets/shmupfont.xml');
+    this.load.bitmapFont('rolling', 'assets/rolling-thunder.png', 'assets/rolling-thunder.xml');
   }
 
   create () {
@@ -61,6 +74,8 @@ class PhaserGame {
     this.platforms = this.add.group();
 
     this.stars = new StarRewards(this);
+
+    this.stars.playerCollision.add(this.onPlayerCollision, this);
     //  Enable physics for objects created in this group
     this.platforms.enableBody = true;
     // Here we create the ground.
@@ -72,9 +87,8 @@ class PhaserGame {
     ground.body.immovable = true;
     ground.fixedToCamera = true;
 
-    this.add.bitmapText(WIDTH - 170, 5, 'shmupfont', "Score: ", 18);
-    // TODO: change font since this one does not provide numbers
-    this.scoreText = this.add.bitmapText(300, 300, 'shmupfont', "0000", 18);
+    this.add.bitmapText(WIDTH - 170, 5, 'rolling', "Score: ", 18);
+    this.scoreText = this.add.bitmapText(WIDTH - 60, 5, 'rolling', "000", 18);
 
     //---------------------------------------------------//
     //--------------------- PLAYER ----------------------//
@@ -131,7 +145,6 @@ class PhaserGame {
       }
     }else if (this.cursors.right.isDown){
       //  Move to the right
-      console.log('Hit platform', hitPlatform);
       this.player.body.velocity.x = 150;
       if (this.facing !== 'right') {
         this.player.play('right');
@@ -169,9 +182,18 @@ class PhaserGame {
   starsSequence() {
     //  Set-up a simple repeating timer
     //game.time.events.repeat(Phaser.Timer.SECOND, 20, resurrect, this);
-    this.starsTimer = this.time.events.loop(Phaser.Timer.SECOND * 5, () => {
+    this.starsTimer = this.time.events.loop(Phaser.Timer.SECOND * STARS_INTERVAL, () => {
       this.stars.addReward(WIDTH + 50, 300);
     }, this);
+  }
+
+  onPlayerCollision(star) {
+    if (isNaN(this.player.body.velocity.y)) {
+      this.player.body.velocity.y = -265;
+    }
+    // TODO: Increase points by 10 on each collision
+    this.score+= 10;
+    this.scoreText.text = PhaserGame.padScore(this.score);
   }
 }
 
