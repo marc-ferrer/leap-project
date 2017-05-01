@@ -1,9 +1,12 @@
 const path = require('path');
 
 module.exports = {
-  entry: './runnerboy/game.js',
+  entry: {
+    runnerboy: './runnerboy/game.js',
+    catchstar: './games/catch-stars/catch-stars.js'
+  },
   output: {
-    filename: 'runnerboy-bundle.js',
+    filename: '[name]-bundle.js',
     path: path.resolve(__dirname, 'dist')
   },
   resolve: {

@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+}
+
+.attr-name {
+  font-weight: bold;
+}
+
+#game {
+  width: 800px;
+  height: 600px;
+}
+
+.hand-properties {
+  padding: 16px;
+}
+

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Catch the Stars!</title>
+  <link rel="stylesheet" href="./style.css" media="screen">
+</head>
+<body>
+  <!--<button type="button" name="pause-button" id="pause-button" onclick="togglePause()">Pause</button>-->
+  <div class="container">
+    <canvas id="game" width="800" height="600">
+      You need a modern browser to use this game.
+    </canvas>
+    <div class="hand-properties">
+      <div class="property">
+        <span class="attr-name">Hand rotation: </span>
+        <span id="hand-rotation"></span>
+      </div>
+      <div class="property">
+        <span class="attr-name">Hand pitch: </span>
+        <span id="hand-pitch"></span>
+      </div>
+      <div class="property">
+        <span class="attr-name">Middle tip: </span>
+        <span id="middle-tip"></span>
+      </div>
+      <div class="property">
+        <span class="attr-name">Ring tip: </span>
+        <span id="ring-tip"></span>
+      </div>
+      <div class="property">
+        <span class="attr-name">tips distance: </span>
+        <span id="mr-distance"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Libraries -->
+  <script src="../../lib/utils.js"></script>
+  <script src="../../node_modules/leapjs/leap-0.6.4.js" charset="utf-8"></script>
+  <script src="//js.leapmotion.com/leap-plugins-0.1.12.js"></script>
+  <script src="./leap-controls.js"></script>
+
+  <script src="../../dist/catchstar-bundle.js" charset="utf-8"></script>
+</body>
+</html>
