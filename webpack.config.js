@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    runnerboy: './runnerboy/game.js',
+    runnerboy: './games/runnerboy/game.js',
     catchstar: './games/catch-stars/catch-stars.js'
   },
   output: {
