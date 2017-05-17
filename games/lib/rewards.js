@@ -19,13 +19,15 @@ export class Star extends Phaser.Sprite{
     this.reset(x, y);
     this.body.mass = 0;
 
-    this.game.physics.arcade.velocityFromAngle(angle, -speed, this.body.velocity);
+    this.game.physics.arcade.velocityFromAngle(
+      angle, -speed, this.body.velocity);
 
     this.angle = angle;
   }
 
   stop() {
-    this.game.physics.arcade.velocityFromAngle(this.angle, 0, this.body.velocity);
+    this.game.physics.arcade.velocityFromAngle(
+      this.angle, 0, this.body.velocity);
     this.reset(850, 300);
     // this.loadTexture('star');
     this.scale.set(1);
@@ -47,7 +49,7 @@ export class Star extends Phaser.Sprite{
       }, 50);
     }
   }
-};
+}
 
 export class StarRewards extends Phaser.Group{
   constructor(game) {

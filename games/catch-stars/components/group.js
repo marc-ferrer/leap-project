@@ -5,7 +5,7 @@ export default class Group {
   }
 
   update() {
-    for (var [id, c] of this.components) {
+    for (var [id, c] of this.components) { // eslint-disable-line no-unused-vars
       c.update();
       if (c.type === 'star' && ! c.collided) {
         if (c.crashWith(this.game.lPicker)) {
@@ -26,7 +26,7 @@ export default class Group {
   }
 
   draw() {
-    for (var [id, c] of this.components) {
+    for (var [id, c] of this.components) { // eslint-disable-line no-unused-vars
       c.draw();
     }
   }

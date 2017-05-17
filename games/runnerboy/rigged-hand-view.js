@@ -4,7 +4,9 @@ const sceneHeight = 480;
 const MAX_DISTANCE = 10000;
 const FOV = 55; // Field Of View from bottom to top of view, in degrees
 
-let scene, camera, renderer;
+let scene;
+let camera;
+let renderer;
 
 let paused = false;
 
@@ -65,7 +67,8 @@ controller
 		}
 	},
 	boneColors: function(boneMesh, leapHand) {
-		if ((boneMesh.name.indexOf('Finger_0') === 0) || (boneMesh.name.indexOf('Finger_1') === 0)) {
+		if ((boneMesh.name.indexOf('Finger_0') === 0) ||
+			(boneMesh.name.indexOf('Finger_1') === 0)) {
 			return {
 				hue: 0.6,
 				saturation: leapHand.pinchStrength
@@ -104,12 +107,10 @@ controller.on('playback.recordingFinished', player => {
 });
 
 function init() {
-	let geometry, material;
-
 	// TODO: Move to separate function
 	// Scene init
 	renderer = new THREE.WebGLRenderer({
-		alpha: 1,
+		alpha: true,
 		antialias: true
 	});
 	renderer.setSize(sceneWidth, sceneHeight);
@@ -117,7 +118,8 @@ function init() {
 
 	window.addEventListener('resize', onWindowResize, false);
 
-	camera = new THREE.PerspectiveCamera(FOV, sceneWidth / sceneHeight, 1, MAX_DISTANCE);
+	camera = new THREE.PerspectiveCamera(
+		FOV, sceneWidth / sceneHeight, 1, MAX_DISTANCE);
 	camera.position.set(cameraX, cameraY, cameraZ);
 
 	scene = new THREE.Scene();
@@ -137,18 +139,6 @@ function onWindowResize() {
 	camera.updateProjectionMatrix();
 
 	renderer.setSize(sceneWidth, sceneHeight);
-}
-
-let handsPrinted = false;
-function animate2(frame) {
-	let positions;
-
-	if (frame.hands.length) {
-		if (!handsPrinted) {
-			console.log('Hands: ', frame.hands);
-			handsPrinted = true;
-		}
-	}
 }
 
 let handUpstarted = false;
@@ -194,15 +184,16 @@ function getHand() {
 
 window.onkeydown = (e) => {
 	// console.log(String.fromCharCode(e.keyCode)+" --> "+e.keyCode);
+	let hand;
 	switch (e.keyCode) {
 		case 72:
-			const hand = getHand();
+			hand = getHand();
 			console.log(hand);
 			break;
 		case 68:
-			const hnd = getHand();
-			if (hnd) {
-				console.log(hnd.palmNormal);
+			hand = getHand();
+			if (hand) {
+				console.log(hand.palmNormal);
 			}else {
 				console.log('Hand not available');
 			}
@@ -212,9 +203,8 @@ window.onkeydown = (e) => {
 	}
 };
 
-
-
 // TODO: enable pause feature
+// eslint-disable-next-line no-unused-vars
 function togglePause() {
 	let buttonText;
 
@@ -225,6 +215,7 @@ function togglePause() {
 }
 
 controller.on('gesture', onGesture);
-function onGesture(gesture,frame){
+// eslint-disable-next-line no-unused-vars
+function onGesture(gesture, frame){
 	// console.log(gesture.type + " with ID " + gesture.id + " in frame " + frame.id);
 }

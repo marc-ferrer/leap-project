@@ -16,10 +16,11 @@ const container = document.getElementById('game-container');
 const roadLength = 1500;
 const roadWidth = 600;
 
-let scene, camera, renderer;
+let scene;
+let camera;
+let renderer;
 let floor = [];
 const cubes = [];
-let geometry, material, mesh;
 let picker;
 
 // STATS
@@ -34,23 +35,22 @@ Physijs.scripts.worker = './js/physijs_worker.js';
 Physijs.scripts.ammo = './ammo.js';
 
 function addGround(groundLength, groundWidth){
-	//create the ground material
-	//every groundLengthpx on the z axis, add a bit of ground
-	const baseZ = 1000;
+	// create the ground material
+	// every groundLengthpx on the z axis, add a bit of ground
 	const groundColors = [0x111111, 0xfdfdfd, 0x111111];
 	for (let z = 0; z < 3; z++){
 		const groundMat = new THREE.MeshBasicMaterial({color: groundColors[z]});
-		//create the plane geometry
+		// create the plane geometry
 		const geometry = new THREE.PlaneGeometry(groundWidth, groundLength);
-		
-		//create the ground form the geometry and material
+
+		// create the ground form the geometry and material
 		const ground = new THREE.Mesh(geometry, groundMat);
 		ground.rotation.x = -Math.PI/2;
-		ground.position.y = -2; //lower it
-		// Then set the z position to where it is in the loop (distance of camera)
+		ground.position.y = -2; // lower it
+		//  Then set the z position to where it is in the loop (distance of camera)
 		ground.position.z = -z * groundLength;
 		ground.doubleSided = true;
-		//add the ground to the scene
+		// add the ground to the scene
 		scene.add(ground);
 		floor.push(ground);
 	}
@@ -58,10 +58,10 @@ function addGround(groundLength, groundWidth){
 
 function addWalls(length, height){
 	const wallMat = new THREE.MeshBasicMaterial({color: 0xcccccc});
-	//create the plane geometry
+	// create the plane geometry
 	const geometry = new THREE.PlaneGeometry(height, length);
-	
-	//create the ground form the geometry and material
+
+	// create the ground form the geometry and material
 	const lWall = new THREE.Mesh(geometry, wallMat);
 	lWall.rotation.z = -Math.PI / 2;
 	lWall.rotation.y = Math.PI / 2;
@@ -92,6 +92,7 @@ function animateGrounds() {
   }
 }
 
+// eslint-disable-next-line no-unused-vars
 function onCubePicked(cube, relVelocity, relRotation, contactNormal){
 	console.log('Cube picked!!!', cube);
 	// TODO: Add cube explosion / particles
@@ -109,8 +110,9 @@ function init() {
 	scene = new Physijs.Scene;
 	// scene.setGravity(new THREE.Vector3(0, 0, 10));
 	scene.setGravity(new THREE.Vector3(0, 0, 0));
-	
-	camera = new THREE.PerspectiveCamera(FOV, sceneWidth / sceneHeight, 1, MAX_DISTANCE);
+
+	camera = new THREE.PerspectiveCamera(
+		FOV, sceneWidth / sceneHeight, 1, MAX_DISTANCE);
 	camera.position.z = 1000;
 	camera.position.y = 250;
 
@@ -130,22 +132,22 @@ function init() {
 	picker.position.z = 300;
 	scene.add(picker);
 	picker.addEventListener('collision', onCubePicked);
-	
+
 	let axisHelper = new THREE.AxisHelper(300);
 	scene.add(axisHelper);
-	
+
 	let gridHelper = new THREE.GridHelper(600, 10);
 	gridHelper.position.set(0, 1, 0);
 	scene.add(gridHelper);
-	
+
 	renderer = new THREE.WebGLRenderer({
 		alpha: 1,
 		antialias: true
 	});
 	renderer.setSize(sceneWidth, sceneHeight);
-	
+
 	container.appendChild(renderer.domElement);
-	
+
 	camera.lookAt(picker.position);
 }
 

@@ -1,7 +1,7 @@
 import Component from './component';
 
 export default class Star extends Component {
-  constructor(game, width, height, color, x, y, type) {
+  constructor(game, width, height, color, x, y) {
     super(game, width, height, color, x, y, 'star');
   }
 

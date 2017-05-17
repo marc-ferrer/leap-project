@@ -7,7 +7,7 @@ export default class Component {
       return v.toString(16);
     });
   }
-  
+
   constructor(game, width, height, color, x, y, type) {
     this.id = Component.generateUid();
     this.game = game;
@@ -20,13 +20,13 @@ export default class Component {
     this.width = width;
     this.height = height;
     this.speedX = 0;
-    this.speedY = 0;    
+    this.speedY = 0;
     this.x = x;
     this.y = y;
     this.gravity = 0;
     this.gravitySpeed = 0;
   }
-  
+
   draw() {
     this.context.save();
     if (this.type === "text") {
@@ -40,7 +40,7 @@ export default class Component {
 
     this.context.restore();
   }
-  
+
   update() {
     this.gravitySpeed += this.gravity;
     this.x += this.speedX;
@@ -49,7 +49,7 @@ export default class Component {
       this.hitBottom();
     }
   }
-  
+
   hitBottom() {
     const rockbottom = this.game.canvas.height - this.height;
     if (this.y > rockbottom) {
@@ -57,7 +57,7 @@ export default class Component {
       this.gravitySpeed = 0;
     }
   }
-  
+
   crashWith(otherobj) {
     const myleft = this.x;
     const myright = this.x + (this.width);
@@ -68,7 +68,8 @@ export default class Component {
     const othertop = otherobj.y;
     const otherbottom = otherobj.y + (otherobj.height);
     let crash = true;
-    if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
+    if ((mybottom < othertop) || (mytop > otherbottom) ||
+      (myright < otherleft) || (myleft > otherright)) {
       crash = false;
     }
     return crash;

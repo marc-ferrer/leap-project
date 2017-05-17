@@ -1,15 +1,11 @@
-import {Star, StarRewards} from '../lib/rewards.js'
+import {StarRewards} from '../lib/rewards.js'
 
 const WIDTH = 640;
 const HEIGHT = 480;
-const GAME_CONTAINER_ID = 'runner-window';
 const GRAVITY = 500;
 const STARS_INTERVAL = 2;
 
 let game;
-let player;
-let platforms;
-let cursors;
 
 class PhaserGame {
 
@@ -47,7 +43,8 @@ class PhaserGame {
     this.load.spritesheet('dude', 'assets/dude.png', 32, 48);
     this.load.image('flare', 'assets/flare.png');
 
-    this.load.bitmapFont('rolling', 'assets/rolling-thunder.png', 'assets/rolling-thunder.xml');
+    this.load.bitmapFont(
+      'rolling', 'assets/rolling-thunder.png', 'assets/rolling-thunder.xml');
   }
 
   create () {
@@ -87,8 +84,8 @@ class PhaserGame {
     ground.body.immovable = true;
     ground.fixedToCamera = true;
 
-    this.add.bitmapText(WIDTH - 170, 5, 'rolling', "Score: ", 18);
-    this.scoreText = this.add.bitmapText(WIDTH - 60, 5, 'rolling', "000", 18);
+    this.add.bitmapText(WIDTH - 170, 5, 'rolling', 'Score: ', 18);
+    this.scoreText = this.add.bitmapText(WIDTH - 60, 5, 'rolling', '000', 18);
 
     //---------------------------------------------------//
     //--------------------- PLAYER ----------------------//
@@ -122,7 +119,6 @@ class PhaserGame {
   update() {
     // Scroll background
     // this.trees.tilePosition.x = -(this.camera.x * 0.9);
-
 
     // Collide the player and the stars with the platforms
     let hitPlatform = this.physics.arcade.collide(this.player, this.platforms);
@@ -158,7 +154,8 @@ class PhaserGame {
 
     //  Allow the player to jump if they are touching the ground.
     //  Allow the player to jump if they are touching the ground.
-    if (this.cursors.up.isDown && this.player.body.touching.down && hitPlatform){
+    if (this.cursors.up.isDown && this.player.body.touching.down &&
+      hitPlatform){
       this.player.body.velocity.y = -350;
     }
   }
@@ -166,7 +163,7 @@ class PhaserGame {
   enableHandControlls() {
     window.addEventListener('handUp', () => {
       console.log('Hand Up event received');
-      let hitPlatform = this.physics.arcade.collide(this.player, this.platforms);
+      // let hitPlatform = this.physics.arcade.collide(this.player, this.platforms);
       // TODO: hitPlatform is never evaluated as true here, why?
       if (this.player.body.touching.down) {
         this.player.body.velocity.y = -350;
@@ -181,13 +178,14 @@ class PhaserGame {
 
   starsSequence() {
     //  Set-up a simple repeating timer
-    //game.time.events.repeat(Phaser.Timer.SECOND, 20, resurrect, this);
-    this.starsTimer = this.time.events.loop(Phaser.Timer.SECOND * STARS_INTERVAL, () => {
-      this.stars.addReward(WIDTH + 50, 300);
-    }, this);
+    // game.time.events.repeat(Phaser.Timer.SECOND, 20, resurrect, this);
+    this.starsTimer = this.time.events
+      .loop(Phaser.Timer.SECOND * STARS_INTERVAL, () => {
+        this.stars.addReward(WIDTH + 50, 300);
+      }, this);
   }
 
-  onPlayerCollision(star) {
+  onPlayerCollision(star) { // eslint-disable-line no-unused-vars
     if (isNaN(this.player.body.velocity.y)) {
       this.player.body.velocity.y = -265;
     }

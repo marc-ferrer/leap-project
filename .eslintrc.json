@@ -1,0 +1,47 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true,
+        "node": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "sourceType": "module"
+    },
+    "extends": "eslint:recommended",
+    "rules": {
+        "no-console": "off",
+        "no-array-constructor": "error",
+        "new-cap": "error",
+        "no-multiple-empty-lines": "error",
+        "no-trailing-spaces": "error",
+        "array-bracket-spacing": [2, "never"],
+        "comma-spacing": "error",
+        "comma-style": "error",
+        "eol-last": "error",
+        "max-len": ["error", {
+            "ignoreComments": true,
+            "code": 80,
+            "tabWidth": 2,
+            "ignoreUrls": true
+        }],
+        "no-var": "error",
+        "one-var": ["error", {
+            "var": "never",
+            "let": "never",
+            "const": "never"
+        }],
+        "quotes": ["error", "single", {"allowTemplateLiterals": true}]
+    },
+    "globals": {
+        "Leap": true,
+        "Stats": true,
+        "THREE": true,
+        "Physijs": true,
+        "Phaser": true
+    }
+}

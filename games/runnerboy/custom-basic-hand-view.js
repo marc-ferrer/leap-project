@@ -4,7 +4,9 @@ const sceneHeight = 480;
 const MAX_DISTANCE = 10000;
 const FOV = 55; // Field Of View from bottom to top of view, in degrees
 
-let scene, camera, renderer;
+let scene;
+let camera;
+let renderer;
 let paused = false;
 
 let cameraX = -500;
@@ -19,7 +21,7 @@ Leap.loop(animate2);
 Leap.loopController.setBackground(true);
 
 function init() {
-	let geometry, material;
+	let material;
 
 	// TODO: Move to separate function
 	// Scene init
@@ -32,7 +34,8 @@ function init() {
 
   window.addEventListener('resize', onWindowResize, false);
 
-  camera = new THREE.PerspectiveCamera(FOV, sceneWidth / sceneHeight, 1, MAX_DISTANCE);
+  camera = new THREE.PerspectiveCamera(
+		FOV, sceneWidth / sceneHeight, 1, MAX_DISTANCE);
   camera.position.set(cameraX, cameraY, cameraZ);
 
   scene = new THREE.Scene();
@@ -46,11 +49,11 @@ function init() {
 
 	// TODO: move to separate function
 	// Hand init
-  let indexGeometry = new THREE.BoxGeometry(10, 10, 100);
-	let thumbGeometry = new THREE.BoxGeometry(10, 10, 60);
-	let middleGeometry = new THREE.BoxGeometry(10, 10, 120);
-	let ringGeometry = new THREE.BoxGeometry(10, 10, 80);
-	let pinkyGeometry = new THREE.BoxGeometry(8, 8, 60);
+  const indexGeometry = new THREE.BoxGeometry(10, 10, 100);
+	const thumbGeometry = new THREE.BoxGeometry(10, 10, 60);
+	const middleGeometry = new THREE.BoxGeometry(10, 10, 120);
+	const ringGeometry = new THREE.BoxGeometry(10, 10, 80);
+	const pinkyGeometry = new THREE.BoxGeometry(8, 8, 60);
   material = new THREE.MeshNormalMaterial();
 	hand.thumb = new THREE.Mesh(thumbGeometry, material);
   hand.index = new THREE.Mesh(indexGeometry, material);
@@ -130,7 +133,7 @@ function animate() {
 }
 
 // TODO: enable pause feature
-function togglePause() {
+function togglePause() { // eslint-disable-line no-unused-vars
 	let buttonText;
 
 	paused = !paused;
