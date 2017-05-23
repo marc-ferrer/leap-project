@@ -42,6 +42,7 @@
         "Stats": true,
         "THREE": true,
         "Physijs": true,
-        "Phaser": true
+        "Phaser": true,
+        "io": true
     }
 }
