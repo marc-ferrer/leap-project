@@ -27,6 +27,7 @@ class PhaserGame {
 
     this.speed = 150;
     this.gravity = GRAVITY;
+    this.lastCatchedStar = null;
   }
 
   init() {
@@ -124,30 +125,6 @@ class PhaserGame {
       this.facing = 'right';
     }
 
-    //  Reset the players velocity (movement)
-    // simple controls commented
-    /*this.player.body.velocity.x = 0;
-
-    if (this.cursors.left.isDown){
-      //  Move to the left
-      this.player.body.velocity.x = -150;
-      if (this.facing !== 'left') {
-        this.player.play('left');
-      }
-    }else if (this.cursors.right.isDown){
-      //  Move to the right
-      this.player.body.velocity.x = 150;
-      if (this.facing !== 'right') {
-        this.player.play('right');
-      }
-    } else{
-      //  Stand still
-      this.player.animations.stop();
-      this.player.frame = 4;
-      this.facing = 'front';
-    }*/
-
-    //  Allow the player to jump if they are touching the ground.
     //  Allow the player to jump if they are touching the ground.
     if (this.cursors.up.isDown && this.player.body.touching.down &&
       hitPlatform){
@@ -180,13 +157,18 @@ class PhaserGame {
       }, this);
   }
 
-  onPlayerCollision(star) { // eslint-disable-line no-unused-vars
+  onPlayerCollision(star) {
     if (isNaN(this.player.body.velocity.y)) {
-      this.player.body.velocity.y = -265;
+      this.player.body.velocity.y = -240;
     }
-    // TODO: Increase points by 10 on each collision
-    this.score+= 10;
-    this.scoreText.text = PhaserGame.padScore(this.score);
+    if (this.player.body.position.y < 255) {
+      this.player.body.velocity.y = 10;
+    }
+    if (star !== this.lastCatchedStar) {
+      this.score+= 10;
+      this.scoreText.text = PhaserGame.padScore(this.score);
+      this.lastCatchedStar = star;
+    }
   }
 }
 
