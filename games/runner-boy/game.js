@@ -35,22 +35,17 @@ class PhaserGame {
 
   preload () {
     // Load game assets here
-    this.load.image('logo', 'assets/phaser.png');
     this.load.image('sky', 'assets/sky.png');
     this.load.image('trees', 'assets/trees-h.png');
     this.load.image('ground', 'assets/platform.png');
     this.load.image('star', 'assets/star.png');
     this.load.spritesheet('dude', 'assets/dude.png', 32, 48);
-    this.load.image('flare', 'assets/flare.png');
 
     this.load.bitmapFont(
       'rolling', 'assets/rolling-thunder.png', 'assets/rolling-thunder.xml');
   }
 
   create () {
-    // let logo = this.add.sprite(this.world.centerX, this.world.centerY, 'logo');
-    // logo.anchor.setTo(0.5, 0.5);
-
     //  We're going to be using physics, so enable the Arcade Physics system
     this.physics.startSystem(Phaser.Physics.ARCADE);
 

@@ -2,10 +2,16 @@
 // TODO: Import of vectorToString from util and remove the line above
 const controller = new Leap.Controller();
 window.controller = controller;
-// Leap.loopController.setBackground(true);
+const socket = io('http://localhost:3000/catch-stars', {
+  autoConnect: false
+});
+
 controller
-.use('handEntry')
-.connect();
+  .use('handEntry')
+  .use('socket-networking', {
+    socket: socket
+  })
+  .connect();
 
 function onFrame(frame) {
 	// TODO: Program frame filtering here

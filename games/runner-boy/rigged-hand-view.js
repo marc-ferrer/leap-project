@@ -14,36 +14,24 @@ let cameraX = -500;
 let cameraY = 500;
 let cameraZ = 500;
 
-// STATS
-const stats = new Stats();
-
-stats.domElement.style.position = 'absolute';
-
-stats.domElement.style.left = '0px';
-
-stats.domElement.style.top = '0px';
-
-document.body.appendChild(stats.domElement);
-// ----------------------------------------- //
-
 init();
 // animate();
 // const controller = Leap.loop(animate);
 const controller = new Leap.Controller();
 window.controller = controller;
+const socket = io('http://localhost:3000/runner-boy', {
+  autoConnect: false
+});
 // Leap.loopController.setBackground(true);
 controller
 .use('handHold').use('transform', {
 	position: new THREE.Vector3(1, 0, 0)
 })
 .use('handEntry')
-.use('screenPosition')
-// .use('playback', {recording: 'demo.json'})
-.use('playback', {
-  loop: false,
-  pauseHotkey: false,
-  pauseOnHand: false
+.use('socket-networking', {
+	socket: socket
 })
+.use('screenPosition')
 .use('riggedHand', {
 	parent: scene,
 	renderer: renderer,
@@ -59,7 +47,6 @@ controller
 	// 	wireframe: getParam('wireframe')
 	// },
 	// dotsMode: getParam('dots'),
-	stats: stats,
 	camera: camera,
 	boneLabels: function(boneMesh, leapHand) {
 		if (boneMesh.name.indexOf('Finger_03') === 0) {
@@ -77,34 +64,6 @@ controller
 	},
 	checkWebGL: true
 }).connect();
-
-const player = window.controller.plugins.playback.player;
-window.player = player;
-
-// This will start a recording sesion automatically when the Leap controller
-// starts sending data.
-controller.on('streamingStarted', () => {
-	console.log('streamingStarted event received');
-	player.record();
-});
-
-controller.on('playback.record', player => {
-	// Playback plugin started recording the Leap session.
-	console.log('playback.record event received', player);
-});
-
-controller.on('playback.recordingFinished', player => {
-	// Playback plugin stoped recording Leap session.
-	console.log('playback.recordingFinished event received');
-	console.log('player recording options', player.recording.metadata);
-	// We have two options here:
-	// 1 :- include an script to define a global function 'saveAs' and save the file
-	// 			a prompt could be displayed to ask user.
-	// player.recording.save('json');
-	//
-	// 2 :- Send the recording object (player.recording) to a server
-	//			where the data would be processed to update the pacient history & improvement.
-});
 
 function init() {
 	// TODO: Move to separate function
@@ -167,12 +126,6 @@ function onFrame(frame) {
 
 controller.on('frame', onFrame);
 
-/*function animate() {
-	requestAnimationFrame(animate);
-	// controls.update();
-	// stats.update();
-	renderer.render(scene, camera);
-}*/
 function getHand() {
 	const frame = controller.frame();
 	if (frame.hands && frame.hands.length === 1) {
@@ -181,27 +134,6 @@ function getHand() {
 		return null;
 	}
 }
-
-window.onkeydown = (e) => {
-	// console.log(String.fromCharCode(e.keyCode)+" --> "+e.keyCode);
-	let hand;
-	switch (e.keyCode) {
-		case 72:
-			hand = getHand();
-			console.log(hand);
-			break;
-		case 68:
-			hand = getHand();
-			if (hand) {
-				console.log(hand.palmNormal);
-			}else {
-				console.log('Hand not available');
-			}
-			break;
-		default:
-			console.log('Unrecognized key', String.fromCharCode(e.keyCode));
-	}
-};
 
 // TODO: enable pause feature
 // eslint-disable-next-line no-unused-vars

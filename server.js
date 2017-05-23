@@ -63,11 +63,13 @@ const packingStructureV2 = [
   ]}
 ];
 
-let ws;
-io.on('connection', (socket) => {
-  console.log('Client connected through socket.io');
-  /* @type fs.WriteStream */
-  ws = fs.createWriteStream('leap-output.json');
+const gameFiles = new Map();
+
+function leapRecorder(socket){
+  let fileName = socket.id.substring(socket.nsp.name.length + 1);
+  fileName = socket.nsp.name.substring(1) + '-' + fileName + '.json';
+  // gameFiles.set(socket.id, fs.createWriteStream(fileName));
+  const ws = fs.createWriteStream(fileName);
   const metadata = {
     metadata: {
       formatVersion: 2,
@@ -81,25 +83,25 @@ io.on('connection', (socket) => {
   }
   const str = JSON.stringify(metadata);
   ws.write(str.substring(0, str.length - 2));
+
   socket.on('disconnect', () => {
-    console.log('user disconnected');
     ws.write(']}');
     ws.close();
+    gameFiles.delete(socket.id);
   });
 
-  socket.on('data', (data) => {
-    console.log('Data received from leapjs networking', data);
+  socket.on('frameData', (data) => {
+    console.log('frameData event received in server', data);
+    ws.write(',' + JSON.stringify(data.frameData));
   });
+}
 
-  let dataWritten = 0;
-  socket.on('message', (data) => {
-    console.log('Message received from leapjs networking', data);
-    if (dataWritten < 200) {
-      ws.write(',' + JSON.stringify(data.frameData));
-      dataWritten++;
-    }
-  });
-});
+io.of('/catch-stars')
+  .on('connection', leapRecorder);
+io.of('/runner-boy')
+  .on('connection', leapRecorder);
+io.of('cubes-road')
+  .on('connection', leapRecorder);
 
 http.listen(PORT, function () {
   console.log(`'App listening on port ${PORT}!'`);
