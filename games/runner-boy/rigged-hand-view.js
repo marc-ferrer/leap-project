@@ -1,22 +1,5 @@
 'use strict';
-const sceneWidth = 640;
-const sceneHeight = 480;
-const MAX_DISTANCE = 10000;
-const FOV = 55; // Field Of View from bottom to top of view, in degrees
 
-let scene;
-let camera;
-let renderer;
-
-let paused = false;
-
-let cameraX = -500;
-let cameraY = 500;
-let cameraZ = 500;
-
-init();
-// animate();
-// const controller = Leap.loop(animate);
 const controller = new Leap.Controller();
 window.controller = controller;
 const socket = io('http://localhost:3000/runner-boy', {
@@ -32,73 +15,7 @@ controller
 	socket: socket
 })
 .use('screenPosition')
-.use('riggedHand', {
-	parent: scene,
-	renderer: renderer,
-	// scale: getParam('scale'),
-	// positionScale: getParam('positionScale'),
-	helper: true,
-	offset: new THREE.Vector3(0, 0, 0),
-	renderFn: function() {
-		renderer.render(scene, camera);
-		// return controls.update();
-	},
-	// materialOptions: {
-	// 	wireframe: getParam('wireframe')
-	// },
-	// dotsMode: getParam('dots'),
-	camera: camera,
-	boneLabels: function(boneMesh, leapHand) {
-		if (boneMesh.name.indexOf('Finger_03') === 0) {
-			return leapHand.pinchStrength;
-		}
-	},
-	boneColors: function(boneMesh, leapHand) {
-		if ((boneMesh.name.indexOf('Finger_0') === 0) ||
-			(boneMesh.name.indexOf('Finger_1') === 0)) {
-			return {
-				hue: 0.6,
-				saturation: leapHand.pinchStrength
-			};
-		}
-	},
-	checkWebGL: true
-}).connect();
-
-function init() {
-	// TODO: Move to separate function
-	// Scene init
-	renderer = new THREE.WebGLRenderer({
-		alpha: true,
-		antialias: true
-	});
-	renderer.setSize(sceneWidth, sceneHeight);
-	document.body.appendChild(renderer.domElement);
-
-	window.addEventListener('resize', onWindowResize, false);
-
-	camera = new THREE.PerspectiveCamera(
-		FOV, sceneWidth / sceneHeight, 1, MAX_DISTANCE);
-	camera.position.set(cameraX, cameraY, cameraZ);
-
-	scene = new THREE.Scene();
-
-	let axisHelper = new THREE.AxisHelper(150);
-	scene.add(axisHelper);
-
-	let gridHelper = new THREE.GridHelper(150, 10);
-	gridHelper.position.set(0, 1, 0);
-	scene.add(gridHelper);
-
-	camera.lookAt(new THREE.Vector3( ));
-}
-
-function onWindowResize() {
-	camera.aspect = sceneWidth / sceneHeight;
-	camera.updateProjectionMatrix();
-
-	renderer.setSize(sceneWidth, sceneHeight);
-}
+.connect();
 
 let handUpstarted = false;
 function onFrame(frame) {
@@ -125,29 +42,3 @@ function onFrame(frame) {
 }
 
 controller.on('frame', onFrame);
-
-function getHand() {
-	const frame = controller.frame();
-	if (frame.hands && frame.hands.length === 1) {
-		return frame.hands[0]
-	}else {
-		return null;
-	}
-}
-
-// TODO: enable pause feature
-// eslint-disable-next-line no-unused-vars
-function togglePause() {
-	let buttonText;
-
-	paused = !paused;
-	buttonText = (paused)? 'Resume' : 'Pause';
-
-	document.getElementById('pause-button').innerText = buttonText;
-}
-
-controller.on('gesture', onGesture);
-// eslint-disable-next-line no-unused-vars
-function onGesture(gesture, frame){
-	// console.log(gesture.type + " with ID " + gesture.id + " in frame " + frame.id);
-}
