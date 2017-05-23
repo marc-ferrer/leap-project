@@ -1,8 +1,16 @@
 const controller = new Leap.Controller();
 window.controller = controller;
+const io = window.io;
+console.log('io', window.io);
+const socket = io('http://localhost:3000/cubes-road', {
+  autoConnect: false
+});
 // Leap.loopController.setBackground(true);
 controller
 .use('handEntry')
+.use('socket-networking', {
+	socket: socket
+})
 .connect();
 
 // base min and max yaws

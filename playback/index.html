@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Leap Rigged Hand</title>
+
+  <style>
+    body{
+      margin: 0;
+    }
+
+    #connect-leap {
+      display: none !important;
+    }
+    .controls {
+      width: 100%;
+    }
+    .controls input[type="range"] {
+      /*-webkit-appearance: none;*/
+      width: 100%;
+      border-radius: 8px !important;
+      height: 7px;
+      border: 1px solid #bdc3c7;
+      background-color: #fff;
+    }
+    /*.input[type=range] {
+      -webkit-appearance: none;
+      width: 100%;
+      border-radius: 8px;
+      height: 7px;
+      border: 1px solid #bdc3c7;
+      background-color: #fff;
+    }*/
+    .controls-container {
+      padding: 0 16px;
+    }
+    .slider {
+      width: 100%;
+    }
+  </style>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <!--<link rel="stylesheet" href="../font-awesome-4.7.0/css/font-awesome.min.css">-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+  <div id="playback-renderer"></div>
+  <div class="controls-container">
+    <div class="controls-container">
+      <input type="range" id="play-slider" class="slider">
+      <button id="toggle-playback"><i class="fa fa-pause" aria-hidden="true"></i> Pause</button>
+    </div>
+  </div>
+  <!-- TODO: Choose orbit controls or trackball controls, only one-->
+  <script src="../node_modules/three/build/three.min.js"></script>
+  <!--<script src="../node_modules/three/examples/js/controls/OrbitControls.js"></script>-->
+
+  <script src="https://js.leapmotion.com/leap-0.6.4.js"></script>
+  <script src="https://js.leapmotion.com/leap-plugins-0.1.12.js"></script>
+  <script src="https://js.leapmotion.com/leap.rigged-hand-0.1.7.js"></script>
+  <script type="text/javascript" src="./trackball-controls.js"></script>
+
+  <script type="text/javascript" src="./plyaback.js"></script>
+
+</body>
+</html>

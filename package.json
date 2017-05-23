@@ -12,9 +12,11 @@
   },
   "dependencies": {
     "express": "^4.14.0",
+    "glob": "^7.1.1",
     "leapjs": "^0.6.4",
     "leapjs-plugins": "^0.1.12",
     "phaser": "^2.6.2",
+    "socket.io": "^2.0.1",
     "three": "^0.82.1"
   },
   "devDependencies": {
