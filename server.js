@@ -91,7 +91,6 @@ function leapRecorder(socket){
   });
 
   socket.on('frameData', (data) => {
-    console.log('frameData event received in server', data);
     ws.write(',' + JSON.stringify(data.frameData));
   });
 }
