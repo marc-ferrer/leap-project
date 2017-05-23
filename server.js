@@ -67,7 +67,7 @@ let ws;
 io.on('connection', (socket) => {
   console.log('Client connected through socket.io');
   /* @type fs.WriteStream */
-  ws = fs.createWriteStream('leap-output.txt');
+  ws = fs.createWriteStream('leap-output.json');
   const metadata = {
     metadata: {
       formatVersion: 2,
