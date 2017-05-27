@@ -1,9 +1,9 @@
-import {StarRewards} from '../lib/rewards.js'
+import {StarRewards} from './js/rewards.js'
 
 const WIDTH = 640;
 const HEIGHT = 480;
 const GRAVITY = 500;
-const STARS_INTERVAL = 2;
+const STARS_INTERVAL = 8;
 
 let game;
 
@@ -153,6 +153,7 @@ class PhaserGame {
     // game.time.events.repeat(Phaser.Timer.SECOND, 20, resurrect, this);
     this.starsTimer = this.time.events
       .loop(Phaser.Timer.SECOND * STARS_INTERVAL, () => {
+        this.lastCatchedStar = null;
         this.stars.addReward(WIDTH + 50, 300);
       }, this);
   }
