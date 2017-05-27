@@ -29,8 +29,6 @@ export class Star extends Phaser.Sprite{
     this.game.physics.arcade.velocityFromAngle(
       this.angle, 0, this.body.velocity);
     this.reset(850, 300);
-    // this.loadTexture('star');
-    this.scale.set(1);
     this.kill();
   }
 
@@ -40,13 +38,7 @@ export class Star extends Phaser.Sprite{
     if (starHit) {
       // TODO: avoid dispathing the event more than once per star
       this.playerCollision.dispatch(this);
-      // TODO: remove star and add a temporary sprite to indicate that you
-      //        have earned an star. Maybe an small explosion.
-      // this.loadTexture('flare');
-      this.scale.set(0.25);
-      setTimeout(() => {
-        this.stop();
-      }, 50);
+      this.stop();
     }
   }
 }
@@ -70,6 +62,75 @@ export class StarRewards extends Phaser.Group{
   }
 
   addReward(x, y) {
+    this.getFirstExists(false).move(x, y, this.angle, this.speed);
+  }
+
+  onPlayerCollision(star) {
+    this.playerCollision.dispatch(star);
+  }
+}
+
+export class Obstacle extends Phaser.Sprite {
+  constructor(game, x, y, sprite) {
+    let nx = x || 0;
+    let ny = y || 0;
+
+    super(game, nx, ny, sprite);
+    this.sprite = sprite;
+    this.playerCollision = new Phaser.Signal();
+
+    this.checkWorldBounds = true;
+    this.outOfBoundsKill = true;
+
+    this.scale.set(0.5);
+
+    this.exists = false;
+  }
+
+  move(x, y, angle, speed) {
+    this.reset(x, y);
+    this.body.mass = 0;
+
+    this.game.physics.arcade.velocityFromAngle(
+      angle, -speed, this.body.velocity);
+
+    this.angle = angle;
+  }
+
+  stop() {
+    this.game.physics.arcade.velocityFromAngle(
+      this.angle, 0, this.body.velocity);
+    this.reset(850, 300);
+    this.kill();
+  }
+
+  update() {
+    const playerHit = this.game.physics.arcade.collide(this.game.player, this);
+
+    if (playerHit) {
+      this.playerCollision.dispatch(this);
+      this.stop();
+    }
+  }
+}
+
+export class ObstaclesGroup extends Phaser.Group{
+  constructor(game, sprite) {
+    super(game, game.world, 'obstacles group', false, true, Phaser.Physics.ARCADE);
+
+    this.speed = 150;
+    this.angle = 0;
+    this.playerCollision = new Phaser.Signal();
+
+    for (let i = 0; i < 10; i++) {
+      const obst = new Obstacle(game, 0, 0, sprite);
+      obst.playerCollision.add(this.onPlayerCollision, this);
+      this.add(obst, true);
+    }
+
+  }
+
+  addObstacle(x, y) {
     this.getFirstExists(false).move(x, y, this.angle, this.speed);
   }
 
