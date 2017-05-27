@@ -3,7 +3,8 @@ import {StarRewards, ObstaclesGroup} from './js/rewards.js'
 const WIDTH = 640;
 const HEIGHT = 480;
 const GRAVITY = 500;
-const STARS_INTERVAL = 8;
+const STARS_INTERVAL = 5;
+const OBSTACLES_INTERVAL = 10;
 
 let game;
 
@@ -28,15 +29,29 @@ class PhaserGame {
     this.cursors = null;
 
     this.speed = 150;
+    this.speedStep = 50;
     this.gravity = GRAVITY;
     this.lastCatchedStar = null;
+
+    this.maxSpeed = 500;
+    this.minStarsInterval = 1500;
+    this.minObstaclesIntervaL = 2000;
+    this.intervalStep = 300;
   }
 
   resetGame() {
     this.score = 0;
     this.speed = 150;
+    this.speedStep = 50;
     this.gravity = GRAVITY;
     this.lastCatchedStar = null;
+
+    if (this.starsTimer) {
+        this.starsTimer.delay = Phaser.Timer.SECOND * STARS_INTERVAL;
+    }
+    if (this.obstaclesTimer) {
+      this.obstaclesTimer.delay = Phaser.Timer.SECOND * STARS_INTERVAL;
+    }
   }
 
   init() {
@@ -190,7 +205,7 @@ class PhaserGame {
 
   obstaclesSequence(){
     this.obstaclesTimer = this.time.events
-      .loop(Phaser.Timer.SECOND * STARS_INTERVAL * 1, () => {
+      .loop(Phaser.Timer.SECOND * OBSTACLES_INTERVAL, () => {
         this.obstacles.addObstacle(WIDTH, this.height - 120);
       }, this);
   }
@@ -214,6 +229,17 @@ class PhaserGame {
       this.score+= 10;
       this.scoreText.text = PhaserGame.padScore(this.score);
       this.lastCatchedStar = star;
+
+      if (this.score % 50 === 0) {
+        this.speed+= Math.min(this.speed - this.speedStep, this.maxSpeed);
+        this.stars.speed = this.speed;
+        this.obstacles.speed = this.speed;
+        this.starsTimer.delay = Math.max(
+          this.minStarsInterval, this.starsTimer.delay - this.intervalStep);
+        this.obstaclesTimer.delay = Math.max(
+          this.minObstaclesIntervaL,
+          this.obstaclesTimer.delay - this.intervalStep);
+      }
     }
   }
 
