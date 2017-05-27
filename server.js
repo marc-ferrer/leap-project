@@ -93,6 +93,14 @@ function leapRecorder(socket){
   socket.on('frameData', (data) => {
     ws.write(',' + JSON.stringify(data.frameData));
   });
+
+  socket.on('frameBuffer', data => {
+    let buffer = JSON.stringify(data[0]);
+    for (let i = 1; i < data.length; i++) {
+      buffer = buffer + ',' + JSON.stringify(data[i]);
+    }
+    ws.write(',' + buffer);
+  });
 }
 
 io.of('/catch-stars')
