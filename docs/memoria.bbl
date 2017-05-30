@@ -1,0 +1,69 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.4 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \sortlist{nty}{nty}
+    \entry{leapcharacteristics}{online}{}
+      \name{labelname}{1}{}{%
+        {{hash=ca373fedcc6d28a1e6f977e1c0b776b8}{Colgan}{C\bibinitperiod}{Alex}{A\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=ca373fedcc6d28a1e6f977e1c0b776b8}{Colgan}{C\bibinitperiod}{Alex}{A\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{ca373fedcc6d28a1e6f977e1c0b776b8}
+      \strng{fullhash}{ca373fedcc6d28a1e6f977e1c0b776b8}
+      \field{sortinit}{C}
+      \field{sortinithash}{dd0e4ddd17488a6ebf12cd6de2f2c237}
+      \field{labeltitle}{How Does the Leap Motion Controller Work?}
+      \field{title}{How Does the Leap Motion Controller Work?}
+      \verb{url}
+      \verb http://blog.leapmotion.com/hardware-to-software-how-does-the-leap-motion-controller-work/
+      \endverb
+    \endentry
+    \entry{leapsdkdocs}{online}{}
+      \field{sortinit}{L}
+      \field{sortinithash}{c41a2b5886eeae464e75d1a9df4cd13e}
+      \field{labeltitle}{Leap Motion SDK and Plugin Documentation}
+      \field{title}{Leap Motion SDK and Plugin Documentation}
+      \verb{url}
+      \verb https://developer.leapmotion.com/documentation/index.html
+      \endverb
+    \endentry
+    \entry{leapjsplugins}{online}{}
+      \field{sortinit}{L}
+      \field{sortinithash}{c41a2b5886eeae464e75d1a9df4cd13e}
+      \field{labeltitle}{LeapJS and Plugins}
+      \field{title}{LeapJS and Plugins}
+      \verb{url}
+      \verb https://developer-archive.leapmotion.com/javascript#plugins
+      \endverb
+    \endentry
+    \entry{nodejs}{online}{}
+      \field{sortinit}{W}
+      \field{sortinithash}{e560dae78a85a037c3da51c61467873a}
+      \field{labeltitle}{What You Need To Know About Node.js}
+      \field{title}{What You Need To Know About Node.js}
+      \verb{url}
+      \verb http://readwrite.com/2013/11/07/what-you-need-to-know-about-nodejs
+      \endverb
+    \endentry
+  \endsortlist
+\endrefsection
+\endinput
+
