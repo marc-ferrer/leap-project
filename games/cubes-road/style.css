@@ -26,3 +26,34 @@ body {
 	text-transform: uppercase;
   font-size: 26px;
 }
+
+.messages-container{
+  position: absolute;
+}
+
+.message {
+	font-weight: bold;
+	position: absolute;
+	left: 0;
+	width: 100%;
+	text-align: center;
+	text-transform: uppercase;
+	pointer-events: none;
+}
+
+.over-message {
+	font-size: 1.25vw;
+	bottom: 40vh;
+	display: none;
+	text-indent: 0.5em;
+	letter-spacing: 0.5em;
+	color: #d1b790;
+}
+
+.replay-message {
+	font-size: 1.25vw;
+	bottom: 40vh;
+	text-indent: 0.5em;
+	letter-spacing: 0.5em;
+	color: #d1b790;
+}

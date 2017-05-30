@@ -8,6 +8,9 @@ const sceneWidth = 800;
 const sceneHeight = 600;
 // const sceneWidth = window.innerWidth;
 // const sceneHeight = window.innerHeight;
+const INITIAL_LIFES = 1;
+const INITIAL_SCORE = 0;
+const INITIAL_LEVEL = 0;
 const MAX_DISTANCE = 10000;
 const FOV = 50; // Field Of View from bottom to top of view, in degrees
 const CUBES_INTERVAL = 5000; // ms
@@ -29,10 +32,10 @@ class Picker {
 		this.zSize = 100;
 		this.xScale = 1;
 
-		this.geom = new THREE.CubeGeometry(this.xSize, this.ySize, this.zSize);
-		this.mat = new THREE.MeshLambertMaterial({color: this.color});
+		this.geometry = new THREE.CubeGeometry(this.xSize, this.ySize, this.zSize);
+		this.material = new THREE.MeshLambertMaterial({color: this.color});
 		this.weight = 0;
-		this.mesh = new Physijs.BoxMesh(this.geom, this.mat, this.weight);
+		this.mesh = new Physijs.BoxMesh(this.geometry, this.material, this.weight);
 		this.position = this.mesh.position;
 
 		this.mesh.castShadow = true;
@@ -56,6 +59,16 @@ class Picker {
 		this.mesh.__dirtyPosition = true;
 	}
 
+	reset() {
+		this.mesh.setLinearFactor(new THREE.Vector3(0, 0, 0));
+		this.mesh.setLinearVelocity(new THREE.Vector3(0, 0, 0));
+		this.mesh.setAngularFactor(new THREE.Vector3(0, 0, 0));
+		this.mesh.setAngularVelocity(new THREE.Vector3(0, 0, 0));
+
+		this.xScale = 1;
+		this.mesh.scale.set(1, 1, 1);
+	}
+
 	shrink() {
 		if (this.xScale > 0.2) {
 			this.xScale-= 0.2;
@@ -72,9 +85,9 @@ class Cube {
 		this.points = 10;
 		this.color = color || 0x888888;
 
-		this.geom = new THREE.CubeGeometry(width, 50, 100);
-		this.mat = new THREE.MeshLambertMaterial({color: this.color});
-		this.mesh = new Physijs.BoxMesh(this.geom, this.mat);
+		this.geometry = new THREE.CubeGeometry(width, 50, 100);
+		this.material = new THREE.MeshLambertMaterial({color: this.color});
+		this.mesh = new Physijs.BoxMesh(this.geometry, this.material);
 		this.position = this.mesh.position;
 		this.mesh.castShadow = true;
 	}
@@ -172,15 +185,19 @@ class ParticlesHolder{
 
 class Game {
 	constructor(){
-		this.level = 0;
-		this.score = 0;
+		this.level = INITIAL_LEVEL;
+		this.score = INITIAL_SCORE;
+		this.lives = INITIAL_LIFES;
 
 		this.container = document.getElementById('game-container');
 		this.scoreText = document.getElementById('score-text');
+		this.gameOverBox = document.getElementById('game-over-box');
+		this.replayMessage = document.getElementById('replay-message');
+		this.scoreMessage = document.getElementById('score-message');
 
 		this.cubesInterval = CUBES_INTERVAL;
 		this.maxCubesInterval = 500;
-		this.cubesIntervalStep = 400;
+		this.cubesIntervalStep = 600;
 		this.velocity = CUBES_VELOCITY;
 		this.maxVelocity = CUBES_VELOCITY * 15;
 		this.velocityStep = 100;
@@ -265,6 +282,63 @@ class Game {
 		this.scene.add(rWall);
 	}
 
+	// eslint-disable-next-line no-unused-vars
+	onCubePicked(cubeMesh, relVelocity, relRotation, contactNormal){
+
+		this.particlesHolder.spawnParticles(
+			cubeMesh.position.clone(), 10, cubeMesh.material.color, .8);
+		this.scene.remove(cubeMesh);
+		if (this.cubesMap.get(cubeMesh) instanceof EnemyCube) {
+			this.picker.shrink();
+		}else {
+			this.score += 10;
+			this.scoreText.innerHTML = `score ${this.score}`;
+			this.level = Math.floor(this.score / 50);
+			if (this.score % 50 === 0) {
+				// set up a minimum interval for cubes
+				this.cubesInterval = Math.max(
+					this.cubesInterval - this.cubesIntervalStep, this.maxCubesInterval);
+			}
+			if (this.score % 100 === 0) {
+				this.shrinkCubes();
+			}
+			this.velocity = Math.min(
+				this.velocity + this.velocityStep, this.maxVelocity);
+		}
+		this.cubesMap.delete(cubeMesh);
+	}
+
+	reset(){
+		this.state = 'Playing';
+		this.level = INITIAL_LEVEL;
+		this.score = INITIAL_SCORE;
+		this.lives = INITIAL_LIFES;
+
+		this.cubesInterval = CUBES_INTERVAL;
+		this.velocity = CUBES_VELOCITY;
+		this.cubesWidth = 100;
+		this.cubesHeight = CUBES_HEIGHT;
+		this.cubesDist = CUBES_DISTANCE;
+		this.cubesXScale = 1;
+		this.enemiesInterval = this.cubesInterval * 5;
+		this.enemiesColor = '';
+		this.enemiesWidth = 80;
+		if (this.cubesMap && this.cubesMap.size > 0) {
+			this.cubesMap.forEach(c => {
+				this.scene.remove(c.mesh);
+			});
+		}
+		this.cubesMap = new Map();
+	}
+
+	initPicker() {
+		this.picker = new Picker(this.scene);
+		this.picker.position.y = CUBES_HEIGHT;
+		this.picker.position.z = 300;
+		this.picker.addToScene();
+		this.picker.addEventListener('collision', this.onCubePicked.bind(this));
+	}
+
 	init() {
 		this.scene = new Physijs.Scene;
 		this.scene.setGravity(new THREE.Vector3(0, 0, 0));
@@ -287,11 +361,7 @@ class Game {
 		this.addWalls(MAX_DISTANCE, 120);
 
 		// Picker
-		this.picker = new Picker(this.scene);
-		this.picker.position.y = CUBES_HEIGHT;
-		this.picker.position.z = 300;
-		this.picker.addToScene();
-		this.picker.addEventListener('collision', this.onCubePicked.bind(this));
+		this.initPicker();
 
 		// Lights
 		this.light = new THREE.SpotLight(0xffffff);
@@ -326,6 +396,7 @@ class Game {
 
 		this.camera.lookAt(this.picker.position);
 
+		this.state = 'Playing';
 		this.tCube = performance.now();
 		this.tEnemy = performance.now();
 	}
@@ -364,7 +435,46 @@ class Game {
 		}
 	}
 
+	handleReplay(key) {
+		if (this.state !== 'Over') {
+			return;
+		}
+		if (key.keyCode === 27) { // escape
+			// Removes the event listener, because this function finally calls animate
+			// should we not remove the listener, multiple animate loops would be created
+			document.removeEventListener('keyup', this.handleReplay);
+			this.gameOverBox.style.display = 'none';
+			this.reset();
+			this.picker.reset();
+			this.animate(performance.now());
+		}
+	}
+
+	gameOver() {
+		this.state = 'Over';
+		this.gameOverBox.style.display = 'block';
+		document.addEventListener('keyup', this.handleReplay.bind(this));
+	}
+
+	handleMisses() {
+		this.cubesMap.forEach((c, key) => {
+			if (c.position.z > this.camera.position.z) {
+				this.scene.remove(c.mesh);
+				this.cubesMap.delete(key);
+				if (!(c instanceof EnemyCube)) {
+					this.lives--;
+				}
+			}
+		});
+		if (this.lives <= 0) {
+			this.gameOver();
+		}
+	}
+
 	animate(tFrame) {
+		if (this.state === 'Playing') {
+			requestAnimationFrame(this.animate.bind(this));
+		}
 		const pickerXPos = getPosition((-roadWidth / 2) + 75, (roadWidth / 2) - 75);
 		if (pickerXPos) {
 			this.picker.position.x = pickerXPos;
@@ -380,35 +490,9 @@ class Game {
 				this.addCube();
 			}
 		}
-		requestAnimationFrame(this.animate.bind(this));
+		this.handleMisses();
 		this.scene.simulate();
 		this.renderer.render(this.scene, this.camera);
-	}
-
-	// eslint-disable-next-line no-unused-vars
-	onCubePicked(cubeMesh, relVelocity, relRotation, contactNormal){
-
-		this.particlesHolder.spawnParticles(
-			cubeMesh.position.clone(), 10, cubeMesh.material.color, .8);
-		this.scene.remove(cubeMesh);
-		if (this.cubesMap.get(cubeMesh) instanceof EnemyCube) {
-			this.picker.shrink();
-		}else {
-			this.score += 10;
-			this.scoreText.innerHTML = `score ${this.score}`;
-			this.level = Math.floor(this.score / 50);
-			if (this.score % 50 === 0) {
-				// set up a minimum interval for cubes
-				this.cubesInterval = Math.max(
-					this.cubesInterval - this.cubesIntervalStep, this.maxCubesInterval);
-			}
-			if (this.score % 100 === 0) {
-				this.shrinkCubes();
-			}
-			this.velocity = Math.min(
-				this.velocity + this.velocityStep, this.maxVelocity);
-		}
-		this.cubesMap.delete(cubeMesh);
 	}
 }
 
