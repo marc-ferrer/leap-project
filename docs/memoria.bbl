@@ -19,6 +19,15 @@
 
 \refsection{0}
   \sortlist{nty}{nty}
+    \entry{xtion}{online}{}
+      \field{sortinit}{A}
+      \field{sortinithash}{c8a29dea43e9d2645817723335a4dbe8}
+      \field{labeltitle}{Asus Xtion}
+      \field{title}{Asus Xtion}
+      \verb{url}
+      \verb https://www.asus.com/3D-Sensor/Xtion/
+      \endverb
+    \endentry
     \entry{leapcharacteristics}{online}{}
       \name{labelname}{1}{}{%
         {{hash=ca373fedcc6d28a1e6f977e1c0b776b8}{Colgan}{C\bibinitperiod}{Alex}{A\bibinitperiod}{}{}{}{}}%
@@ -34,6 +43,79 @@
       \field{title}{How Does the Leap Motion Controller Work?}
       \verb{url}
       \verb http://blog.leapmotion.com/hardware-to-software-how-does-the-leap-motion-controller-work/
+      \endverb
+    \endentry
+    \entry{rehab-principles}{book}{}
+      \name{labelname}{1}{}{%
+        {{hash=7962ebf2f33f2c8748f69728c5ea596e}{Delisa}{D\bibinitperiod}{J}{J\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=7962ebf2f33f2c8748f69728c5ea596e}{Delisa}{D\bibinitperiod}{J}{J\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{7962ebf2f33f2c8748f69728c5ea596e}
+      \strng{fullhash}{7962ebf2f33f2c8748f69728c5ea596e}
+      \field{sortinit}{D}
+      \field{sortinithash}{a01c54d1737685bc6dbf0ea0673fa44c}
+      \field{labeltitle}{Rehabilitation Medicine Principles and Practice}
+      \field{chapter}{68}
+      \field{title}{Rehabilitation Medicine Principles and Practice}
+      \field{year}{1998}
+      \field{pages}{1717\bibrangedash 1732}
+    \endentry
+    \entry{kinect-e3}{online}{}
+      \field{sortinit}{E}
+      \field{sortinithash}{655e26c7438ff123e5c69c6c3f702107}
+      \field{labeltitle}{E3: Microsoft shows off gesture control technology for Xbox 360}
+      \field{title}{E3: Microsoft shows off gesture control technology for Xbox 360}
+      \verb{url}
+      \verb http://latimesblogs.latimes.com/technology/2009/06/microsofte3.html
+      \endverb
+    \endentry
+    \entry{hand-wrist-exercises}{online}{}
+      \field{sortinit}{E}
+      \field{sortinithash}{655e26c7438ff123e5c69c6c3f702107}
+      \field{labeltitle}{Ejercicios de mano y muñeca}
+      \field{title}{Ejercicios de mano y muñeca}
+      \verb{url}
+      \verb https://traumatologiahellin.wordpress.com/ejercicios/ejercicios-de-mano-y-muneca/
+      \endverb
+    \endentry
+    \entry{how-leap-works}{online}{}
+      \field{sortinit}{H}
+      \field{sortinithash}{95b2cb08933fe649b7e9f8beee2132b4}
+      \field{labeltitle}{How Does the Leap Motion Controller Work?}
+      \field{title}{How Does the Leap Motion Controller Work?}
+      \verb{url}
+      \verb http://blog.leapmotion.com/hardware-to-software-how-does-the-leap-motion-controller-work/
+      \endverb
+    \endentry
+    \entry{leap-fruit-ninja}{article}{}
+      \name{labelname}{6}{}{%
+        {{hash=0f6a42faf95a87cf212d28982f675f04}{Khademi}{K\bibinitperiod}{Maryam}{M\bibinitperiod}{}{}{}{}}%
+        {{hash=d4595df9fa1aab180a39981a75b0c639}{Hondori}{H\bibinitperiod}{Hossein\bibnamedelima Mousavi}{H\bibinitperiod\bibinitdelim M\bibinitperiod}{}{}{}{}}%
+        {{hash=b4b24749aac511c20f2ae09612e9aafd}{McKenzie}{M\bibinitperiod}{Alison}{A\bibinitperiod}{}{}{}{}}%
+        {{hash=b0bc61a52a717d5d20d33d23bc6f697d}{Dodakian}{D\bibinitperiod}{Lucy}{L\bibinitperiod}{}{}{}{}}%
+        {{hash=4db68228876e4ae52d675e3f4ed2d83c}{Lopes}{L\bibinitperiod}{Cristina\bibnamedelima Videira}{C\bibinitperiod\bibinitdelim V\bibinitperiod}{}{}{}{}}%
+        {{hash=e6a3525d38481e7e438c21d592649266}{Cramer}{C\bibinitperiod}{Steven\bibnamedelima C.}{S\bibinitperiod\bibinitdelim C\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{6}{}{%
+        {{hash=0f6a42faf95a87cf212d28982f675f04}{Khademi}{K\bibinitperiod}{Maryam}{M\bibinitperiod}{}{}{}{}}%
+        {{hash=d4595df9fa1aab180a39981a75b0c639}{Hondori}{H\bibinitperiod}{Hossein\bibnamedelima Mousavi}{H\bibinitperiod\bibinitdelim M\bibinitperiod}{}{}{}{}}%
+        {{hash=b4b24749aac511c20f2ae09612e9aafd}{McKenzie}{M\bibinitperiod}{Alison}{A\bibinitperiod}{}{}{}{}}%
+        {{hash=b0bc61a52a717d5d20d33d23bc6f697d}{Dodakian}{D\bibinitperiod}{Lucy}{L\bibinitperiod}{}{}{}{}}%
+        {{hash=4db68228876e4ae52d675e3f4ed2d83c}{Lopes}{L\bibinitperiod}{Cristina\bibnamedelima Videira}{C\bibinitperiod\bibinitdelim V\bibinitperiod}{}{}{}{}}%
+        {{hash=e6a3525d38481e7e438c21d592649266}{Cramer}{C\bibinitperiod}{Steven\bibnamedelima C.}{S\bibinitperiod\bibinitdelim C\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{7ff330f376dd6ad3a0e35db6640b269b}
+      \strng{fullhash}{1abe0b0827bbc1709dd05b47aa29d2e0}
+      \field{sortinit}{K}
+      \field{sortinithash}{33bf4c961fa093ee6a297ccbd88eacc0}
+      \field{labeltitle}{Free-hand interaction with leap motion controller for stroke rehabilitation}
+      \field{title}{Free-hand interaction with leap motion controller for stroke rehabilitation}
+      \field{year}{2014}
+      \field{pages}{1663\bibrangedash 1668}
+      \verb{doi}
+      \verb http://dx.doi.org/10.1145/2559206.2581203
       \endverb
     \endentry
     \entry{leapsdkdocs}{online}{}
@@ -54,6 +136,115 @@
       \verb https://developer-archive.leapmotion.com/javascript#plugins
       \endverb
     \endentry
+    \entry{losa-rehab}{article}{}
+      \name{labelname}{7}{}{%
+        {{hash=8ab98fedc5b74d9af31562282b867998}{M}{M\bibinitperiod}{Iosa}{I\bibinitperiod}{}{}{}{}}%
+        {{hash=8dc47cef709a61ddada659d1bff020fe}{G}{G\bibinitperiod}{Morone}{M\bibinitperiod}{}{}{}{}}%
+        {{hash=9e3e12be97325bfccafe1e486bb796b4}{A}{A\bibinitperiod}{Fusco}{F\bibinitperiod}{}{}{}{}}%
+        {{hash=7c69c700f956b57d579f1ee2af798e8d}{M}{M\bibinitperiod}{Castagnoli}{C\bibinitperiod}{}{}{}{}}%
+        {{hash=9cb7d4e6c969399c73a19fe6692cf127}{FR}{F\bibinitperiod}{Fusco}{F\bibinitperiod}{}{}{}{}}%
+        {{hash=b19966b89b1ed4f34710dfa38cc0d00b}{L}{L\bibinitperiod}{Pratesi}{P\bibinitperiod}{}{}{}{}}%
+        {{hash=3b3cad2e6c26f224509d17262204fe84}{S.}{S\bibinitperiod}{Paolucci}{P\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{7}{}{%
+        {{hash=8ab98fedc5b74d9af31562282b867998}{M}{M\bibinitperiod}{Iosa}{I\bibinitperiod}{}{}{}{}}%
+        {{hash=8dc47cef709a61ddada659d1bff020fe}{G}{G\bibinitperiod}{Morone}{M\bibinitperiod}{}{}{}{}}%
+        {{hash=9e3e12be97325bfccafe1e486bb796b4}{A}{A\bibinitperiod}{Fusco}{F\bibinitperiod}{}{}{}{}}%
+        {{hash=7c69c700f956b57d579f1ee2af798e8d}{M}{M\bibinitperiod}{Castagnoli}{C\bibinitperiod}{}{}{}{}}%
+        {{hash=9cb7d4e6c969399c73a19fe6692cf127}{FR}{F\bibinitperiod}{Fusco}{F\bibinitperiod}{}{}{}{}}%
+        {{hash=b19966b89b1ed4f34710dfa38cc0d00b}{L}{L\bibinitperiod}{Pratesi}{P\bibinitperiod}{}{}{}{}}%
+        {{hash=3b3cad2e6c26f224509d17262204fe84}{S.}{S\bibinitperiod}{Paolucci}{P\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{55ae3f8f9d053e0d23f22a96be83fd6b}
+      \strng{fullhash}{c22d466fb71e046c9b55d21bdd78b809}
+      \field{sortinit}{M}
+      \field{sortinithash}{4203d16473bc940d4ac780773cb7c5dd}
+      \field{labeltitle}{Leap motion controlled videogame-based therapy for rehabilitation of elderly patients with subacute stroke: a feasibility pilot study}
+      \field{journaltitle}{Topics in Stroke Rehabilitation}
+      \field{number}{4}
+      \field{title}{Leap motion controlled videogame-based therapy for rehabilitation of elderly patients with subacute stroke: a feasibility pilot study}
+      \field{volume}{22}
+      \field{year}{2015}
+      \field{pages}{306\bibrangedash 316}
+      \verb{doi}
+      \verb 10.1179/1074935714Z.0000000036
+      \endverb
+    \endentry
+    \entry{tesis-cristina}{phdtesis}{}
+      \name{labelname}{1}{}{%
+        {{hash=16bfc9572a62022d25b8ed18e63938db}{Manresa-Yee}{M\bibinithyphendelim Y\bibinitperiod}{Cristina}{C\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=16bfc9572a62022d25b8ed18e63938db}{Manresa-Yee}{M\bibinithyphendelim Y\bibinitperiod}{Cristina}{C\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {Servei de biblioteca i documentació}%
+      }
+      \strng{namehash}{16bfc9572a62022d25b8ed18e63938db}
+      \strng{fullhash}{16bfc9572a62022d25b8ed18e63938db}
+      \field{sortinit}{M}
+      \field{sortinithash}{4203d16473bc940d4ac780773cb7c5dd}
+      \field{labeltitle}{Advanced and natural interaction system for motion-impared users}
+      \field{isbn}{978-84-692-6461-4}
+      \field{title}{Advanced and natural interaction system for motion-impared users}
+      \field{year}{2009}
+      \field{pages}{1\bibrangedash 213}
+    \endentry
+    \entry{kinteract}{article}{}
+      \name{labelname}{3}{}{%
+        {{hash=f179166efa4baea271b6cea81f8374de}{Matos}{M\bibinitperiod}{Nuno}{N\bibinitperiod}{}{}{}{}}%
+        {{hash=075427c96b438d131584545201261b49}{Santos}{S\bibinitperiod}{António}{A\bibinitperiod}{}{}{}{}}%
+        {{hash=f2bdfbca9d8e88803a2583d0e66cd8bf}{Vasconcelos}{V\bibinitperiod}{Ana}{A\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{3}{}{%
+        {{hash=f179166efa4baea271b6cea81f8374de}{Matos}{M\bibinitperiod}{Nuno}{N\bibinitperiod}{}{}{}{}}%
+        {{hash=075427c96b438d131584545201261b49}{Santos}{S\bibinitperiod}{António}{A\bibinitperiod}{}{}{}{}}%
+        {{hash=f2bdfbca9d8e88803a2583d0e66cd8bf}{Vasconcelos}{V\bibinitperiod}{Ana}{A\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{e06f2dec1d422006c7708193b46f86f7}
+      \strng{fullhash}{e06f2dec1d422006c7708193b46f86f7}
+      \field{sortinit}{M}
+      \field{sortinithash}{4203d16473bc940d4ac780773cb7c5dd}
+      \field{labeltitle}{Kinteract: a multi-sensor physical rehabilitation solution based on interactive games}
+      \field{title}{Kinteract: a multi-sensor physical rehabilitation solution based on interactive games}
+      \field{year}{2014}
+      \field{pages}{350\bibrangedash 353}
+      \verb{doi}
+      \verb http://dx.doi.org/10.4108/icst.pervasivehealth.2014.255325
+      \endverb
+    \endentry
+    \entry{wii}{online}{}
+      \field{sortinit}{N}
+      \field{sortinithash}{a52ecf374d1aa02cdea5f29be4dad56c}
+      \field{labeltitle}{Nintendo hopes Wii spells wiinner}
+      \field{title}{Nintendo hopes Wii spells wiinner}
+      \verb{url}
+      \verb https://usatoday30.usatoday.com/tech/gaming/2006-08-14-nintendo-qa_x.htm
+      \endverb
+    \endentry
+    \entry{webster-celik}{article}{}
+      \name{labelname}{2}{}{%
+        {{hash=23952e34077c3011a4dfd6b86e19600e}{Webster}{W\bibinitperiod}{}{}{}{}{}{}}%
+        {{hash=8123c1e07b013cd3d0b341c090bd8745}{Celik}{C\bibinitperiod}{}{}{}{}{}{}}%
+      }
+      \name{author}{2}{}{%
+        {{hash=23952e34077c3011a4dfd6b86e19600e}{Webster}{W\bibinitperiod}{}{}{}{}{}{}}%
+        {{hash=8123c1e07b013cd3d0b341c090bd8745}{Celik}{C\bibinitperiod}{}{}{}{}{}{}}%
+      }
+      \strng{namehash}{3ea0294d161d379aa60ae55b85fcd0ff}
+      \strng{fullhash}{3ea0294d161d379aa60ae55b85fcd0ff}
+      \field{sortinit}{W}
+      \field{sortinithash}{e560dae78a85a037c3da51c61467873a}
+      \field{labeltitle}{Systematic review of Kinect applications in elderly care and stroke rehabilitation}
+      \field{issue}{108}
+      \field{journaltitle}{Journal of NeuroEngineering and Rehabilitation}
+      \field{title}{Systematic review of Kinect applications in elderly care and stroke rehabilitation}
+      \field{volume}{11}
+      \field{year}{2014}
+      \verb{doi}
+      \verb 10.1186/1743-0003-11-108
+      \endverb
+    \endentry
     \entry{nodejs}{online}{}
       \field{sortinit}{W}
       \field{sortinithash}{e560dae78a85a037c3da51c61467873a}
@@ -62,6 +253,29 @@
       \verb{url}
       \verb http://readwrite.com/2013/11/07/what-you-need-to-know-about-nodejs
       \endverb
+    \endentry
+    \entry{liu-rehab}{article}{}
+      \name{labelname}{5}{}{%
+        {{hash=2266deb3cd26fc531f26e90d0dbaaf0a}{Z.}{Z\bibinitperiod}{Liu}{L\bibinitperiod}{}{}{}{}}%
+        {{hash=71bf5d839b546e01928651cac60832f8}{Y.}{Y\bibinitperiod}{Zhang}{Z\bibinitperiod}{}{}{}{}}%
+        {{hash=3039a2d4067aecca07958db568f9352b}{PL.}{P\bibinitperiod}{Patrick\bibnamedelima Rau}{P\bibinitperiod\bibinitdelim R\bibinitperiod}{}{}{}{}}%
+        {{hash=22002b3590afd84680cae464cd0f4645}{P.}{P\bibinitperiod}{Choe}{C\bibinitperiod}{}{}{}{}}%
+        {{hash=81234d02e360487b0eef4b96e76b1a9c}{T.}{T\bibinitperiod}{Gulrez}{G\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{5}{}{%
+        {{hash=2266deb3cd26fc531f26e90d0dbaaf0a}{Z.}{Z\bibinitperiod}{Liu}{L\bibinitperiod}{}{}{}{}}%
+        {{hash=71bf5d839b546e01928651cac60832f8}{Y.}{Y\bibinitperiod}{Zhang}{Z\bibinitperiod}{}{}{}{}}%
+        {{hash=3039a2d4067aecca07958db568f9352b}{PL.}{P\bibinitperiod}{Patrick\bibnamedelima Rau}{P\bibinitperiod\bibinitdelim R\bibinitperiod}{}{}{}{}}%
+        {{hash=22002b3590afd84680cae464cd0f4645}{P.}{P\bibinitperiod}{Choe}{C\bibinitperiod}{}{}{}{}}%
+        {{hash=81234d02e360487b0eef4b96e76b1a9c}{T.}{T\bibinitperiod}{Gulrez}{G\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{32bb88c9f7ed75288a06ebc365d4e669}
+      \strng{fullhash}{4fe92b92679087d9c448e11719295371}
+      \field{sortinit}{Z}
+      \field{sortinithash}{9cca09897f0dfd9ed260e065f6d82cd6}
+      \field{labeltitle}{Leap-Motion Based Online Interactive System for Hand Rehabilitation}
+      \field{title}{Leap-Motion Based Online Interactive System for Hand Rehabilitation}
+      \field{year}{2015}
     \endentry
   \endsortlist
 \endrefsection
