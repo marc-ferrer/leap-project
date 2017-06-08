@@ -89,6 +89,15 @@
       \verb http://blog.leapmotion.com/hardware-to-software-how-does-the-leap-motion-controller-work/
       \endverb
     \endentry
+    \entry{js-event}{online}{}
+      \field{sortinit}{J}
+      \field{sortinithash}{f75b22df8c340a961dce37019e29107f}
+      \field{labeltitle}{Javascript Event}
+      \field{title}{Javascript Event}
+      \verb{url}
+      \verb https://developer.mozilla.org/en-US/docs/Web/API/Event
+      \endverb
+    \endentry
     \entry{leap-fruit-ninja}{article}{}
       \name{labelname}{6}{}{%
         {{hash=0f6a42faf95a87cf212d28982f675f04}{Khademi}{K\bibinitperiod}{Maryam}{M\bibinitperiod}{}{}{}{}}%
@@ -134,6 +143,15 @@
       \field{title}{LeapJS and Plugins}
       \verb{url}
       \verb https://developer-archive.leapmotion.com/javascript#plugins
+      \endverb
+    \endentry
+    \entry{leapjs-playback}{online}{}
+      \field{sortinit}{L}
+      \field{sortinithash}{c41a2b5886eeae464e75d1a9df4cd13e}
+      \field{labeltitle}{LeapJS Playback}
+      \field{title}{LeapJS Playback}
+      \verb{url}
+      \verb https://github.com/leapmotion/leapjs-playback
       \endverb
     \endentry
     \entry{losa-rehab}{article}{}
@@ -220,6 +238,15 @@
       \field{title}{Nintendo hopes Wii spells wiinner}
       \verb{url}
       \verb https://usatoday30.usatoday.com/tech/gaming/2006-08-14-nintendo-qa_x.htm
+      \endverb
+    \endentry
+    \entry{request-animation-frame}{online}{}
+      \field{sortinit}{r}
+      \field{sortinithash}{ff5a3533ecf9d5a03ff60b1e1389b63d}
+      \field{labeltitle}{requestAnimationFrame}
+      \field{title}{requestAnimationFrame}
+      \verb{url}
+      \verb https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
       \endverb
     \endentry
     \entry{webster-celik}{article}{}
