@@ -122,7 +122,7 @@
 	
 	Els subobjetius del projecte que es persegueixen per aconseguir l'objectiu principal són:
 	\begin{itemize}
-		\item Conèixer el funcionament de Leap Motion.
+		\item Conèixer el funcionament de \textit{Leap Motion}.
 		\item Desenvolupar tres videojocs amb diferents tecnologies que treballin exercicis de rehabilitació de la mà i dits.
 		\item Desenvolupar una aplicació de monitoratge perquè el terapeuta pugui controlar els moviments realitzats pel pacient.
 	\end{itemize}
@@ -130,7 +130,7 @@
 	La memòria d'aquest projecte està estructurat de la següent forma:
 	\begin{description}
 		\item[Context] en aquesta secció es descriuen els conceptes bàsics per contextualitzar el projecte: interfícies basades en visió, rehabilitació de la mà i exemples de sistemes interactius on s'ajunten ambdós conceptes.
-		\item[Anàlisi i disseny] en aquesta secció es descriu quin ha estat el sistema i les aplicacions desenvolupades. Es descriuen quines són les característiques del dispositiu Leap Motion, es fa una anàlisi dels requeriments del projecte i finalment es descriu detalladament el disseny de cada aplicació.
+		\item[Anàlisi i disseny] en aquesta secció es descriu quin ha estat el sistema i les aplicacions desenvolupades. Es descriuen quines són les característiques del dispositiu \textit{Leap Motion}, es fa una anàlisi dels requeriments del projecte i finalment es descriu detalladament el disseny de cada aplicació.
 		\item[Implementació] es presenten els detalls d'implementació del sistema i les aplicacions desenvolupades. Es fa un repàs de les tecnologies utilitzades en la realització del projecte i s'analitzen les causes de la seva elecció. Al final de la secció, es descriuen els detalls d'implementació de cada aplicació.
 		\item[Futur] en aquesta secció es descriuen una sèrie d'accions de futur una vegada acabat el projecte.
 		\item[Conclusions] s'exposa l'experiència obtinguda a títol personal i les conclusions obtingudes després de realitzar el projecte.
@@ -212,12 +212,12 @@
 	
 	En concret, \textit{Kinect}, presenta un grau d'utilització molt gran en aquests àmbits. \textit{Webster i Celik} \cite{webster-celik}, presenten un recull de treballs que utilitzen \textit{Kinect} per al cuidat de persones majors, per a la rehabilitació de pacients amb accidents vasculars cerebrals i exercicis basats en videojocs. Amb aplicacions tan diverses que van des de la detecció de caigudes en el cas de persones majors, fins aplicacions destinades a ajudar a que els exercicis de rehabilitació repetitius siguin més entretenguts. En el cas dels exercicis basats en videojocs, un dels treballs estudiats presenta un joc per treballar exercicis d'equilibri. En aquest joc, en el que jugador està representat per una figura humana virtual, uns contorns de figures humanes es movien cap al jugador virtual, que havia de imitar els contorns per tal de passar a través d'ells sense tocar-los.
 	
-	En referència a la rehabilitació de la mà, Leap motion s'empra gràcies a la informació que ens pot donar dels dits i de la posició de la mà. Emprant aquest tecnologia, Liu et al (2015) \cite{liu-rehab} presenten un sistema on el metge pot prescriure al pacient certs moviments per imitar i aquest pot obtenir retroalimentació automàtica en forma de puntuació, d'acord amb la similitud. També es troba la utilització de videojocs per complementar la teràpia convencional (Iosa et al., 2015) \cite{losa-rehab}. Matos et al (2014) \cite{kinteract} presenten un joc per entrenar el rang d'obertura de la mà, l'usuari ha d'obrir la mà per recollir pomes i transportar-les a una cistella mantenint l'obertura de la mà. Khademi et al. (2014) juguen al Fruit Ninja emprant  la mà a rehabilitar per pacients amb accidents vascular cerebrals \cite{leap-fruit-ninja}.
+	En referència a la rehabilitació de la mà, \textit{Leap motion} s'empra gràcies a la informació que ens pot donar dels dits i de la posició de la mà. Emprant aquest tecnologia, Liu et al (2015) \cite{liu-rehab} presenten un sistema on el metge pot prescriure al pacient certs moviments per imitar i aquest pot obtenir retroalimentació automàtica en forma de puntuació, d'acord amb la similitud. També es troba la utilització de videojocs per complementar la teràpia convencional (Iosa et al., 2015) \cite{losa-rehab}. Matos et al (2014) \cite{kinteract} presenten un joc per entrenar el rang d'obertura de la mà, l'usuari ha d'obrir la mà per recollir pomes i transportar-les a una cistella mantenint l'obertura de la mà. Khademi et al. (2014) juguen al Fruit Ninja emprant  la mà a rehabilitar per pacients amb accidents vascular cerebrals \cite{leap-fruit-ninja}.
 	\section{Anàlisi i disseny}
 	\subsection{Introducció}
 	Dins aquest apartat s'analitza i descriu quin ha estat el sistema desenvolupat per tal de satisfer els objectius plantejats anteriorment.
 	
-	En primer lloc es presenta una descripció de l'arquitectura i les característiques del controlador Leap Motion, que serà la interfície basada en visió que s'emprarà.
+	En primer lloc es presenta una descripció de l'arquitectura i les característiques del controlador \textit{Leap Motion}, que serà la interfície basada en visió que s'emprarà.
 	
 	Posteriorment es fa una anàlisi de requisits del sistema a desenvolupar tant des del punt de vista funcional com tecnològic, la qual cosa permet tenir una descripció detallada del sistema.
 	
@@ -230,7 +230,7 @@
 		\centering
 		\caption{Representació del dispositiu i el seu camp de visió \protect\cite{leapcharacteristics}.}
 	\end{figure}
-	Les dades capturades per aquestes càmeres són enviades per USB a l'ordinador al qual es connecta el controlador Leap, on el software de Leap Motion, que s'executa com un servei, s'encarrega de processar-les i deixar-les disponibles perquè puguin ser obtingudes mitjançant APIs.
+	Les dades capturades per aquestes càmeres són enviades per USB a l'ordinador al qual es connecta el controlador \textit{Leap}, on el software de \textit{Leap Motion}, que s'executa com un servei, s'encarrega de processar-les i deixar-les disponibles perquè puguin ser obtingudes mitjançant APIs.
 	
 	El servei del \textit{Leap Motion} proporciona la informació a les APIs en forma d'una sèrie de fotogrames que contenen tota la informació de seguiment capturada. Al final és competència d'aquestes APIs proporcionar a l'usuari les dades en forma d'estructures orientades a objectes, així com també proporcionar una sèrie de funcions que permeten operar amb aquestes dades.
 	\subsubsection{Arquitectura del Leap Motion}
@@ -253,7 +253,7 @@
 	\end{enumerate}
 	
 	\paragraph{Interfície web socket}
-	El servei de Leap Motion executa un servidor de \textit{web socket} local en el domini local (\textit{localhost}) a través del port 6437. Aquesta interfície de web socket proveeix dades de seguiment en format JSON. Després un client \textit{JavaScript} desenvolupat per la mateixa empresa de Leap Motion, s'encarrega de capturar aquestes dades i presentar-les com a objectes de \textit{JavaScript} estàndard.
+	El servei de \textit{Leap Motion} executa un servidor de \textit{web socket} local en el domini local (\textit{localhost}) a través del port 6437. Aquesta interfície de web socket proveeix dades de seguiment en format JSON. Després un client \textit{JavaScript} desenvolupat per la mateixa empresa de \textit{Leap Motion}, s'encarrega de capturar aquestes dades i presentar-les com a objectes de \textit{JavaScript} estàndard.
 	\begin{figure}[H]
 		\includegraphics[width=\textwidth,keepaspectratio]{websocket-interface.png}
 		\centering
@@ -277,7 +277,7 @@
 	\begin{figure}[H]
 		\includegraphics[width=\textwidth,keepaspectratio]{leap-coordinates.png}
 		\centering
-		\caption{Sistema de coordenades del Leap Motion.}
+		\caption{Sistema de coordenades del \textit{Leap Motion}.}
 		\label{fig:leap-coordinates}
 	\end{figure}
 	La API mesura les quantitats físiques en les següents unitats.\\
@@ -359,9 +359,7 @@
 	
 	Una aplicació web té l'avantatge de ser multiplataforma, és independent del sistema operatiu que tingui l'usuari el qual facilita l'accés a l'aplicació.
 	
-	En el nostre cas s'utilitza una arquitectura web tradicional que consta d'un servidor web que és l'encarregat de servir les aplicacions de rehabilitació als usuaris. Aquestes aplicacions contenen la major part de la lògica de l'aplicació. L'arquitectura presenta una peculiaritat, fora del que és una aplicació web tradicional, que és la utilització d'un servidor de \textit{web socket} que s'encarrega de rebre les dades del dispositiu \textit{Leap Motion} dels usuaris i guardar aquestes dades en fitxers per a que puguin ser reproduïts posteriorment pels responsables de les teràpies de rehabilitació.\\
-	
-	// grafic de l'arquitectura de l'aplicació
+	En el nostre cas s'utilitza una arquitectura web tradicional que consta d'un servidor web que és l'encarregat de servir les aplicacions de rehabilitació als usuaris. Aquestes aplicacions contenen la major part de la lògica de l'aplicació. L'arquitectura presenta una peculiaritat, fora del que és una aplicació web tradicional, que és la utilització d'un servidor de \textit{web socket} que s'encarrega de rebre les dades del dispositiu \textit{Leap Motion} dels usuaris i guardar aquestes dades en fitxers per a que puguin ser reproduïts posteriorment pels responsables de les teràpies de rehabilitació.
 	
 	\begin{description}
 		\item [Aplicacions web de rehabilitació] aquestes aplicacions són les encarregades de connectar-se al dispositiu \textit{Leap Motion} dels usuaris per tal que aquests puguin realitzar els exercicis.
@@ -385,7 +383,7 @@
 	\end{figure}
 	L'objectiu és capturar unes estrelles que van apareixent en direcció contraria a l'usuari per obtenir punts. Per tal d'afegir complexitat al joc també apareixen uns obstacles que l'usuari ha d'esquivar per no perdre la partida. A més, a mesura que la puntuació de l'usuari es va incrementant, també ho fa la velocitat a la que es desplaça el joc, tant els obstacles com les estrelles de puntuació.
 	
-	L'usuari controla el joc per mitjà del dispositiu Leap Motion. El primer té la capacitat de fer botar el jugador, per tal d'obtenir les estrelles que s'acosten per l'aire o d'esquivar els obstacles que apareixen per terra. El jugador realitza el moviment de salt quan l'usuari estén el canell, elevant els dits de la mà per sobre del canell tant com li sigui possible.\ref{fig:runnerboy-obstacle}.
+	L'usuari controla el joc per mitjà del dispositiu \textit{Leap Motion}. El primer té la capacitat de fer botar el jugador, per tal d'obtenir les estrelles que s'acosten per l'aire o d'esquivar els obstacles que apareixen per terra. El jugador realitza el moviment de salt quan l'usuari estén el canell, elevant els dits de la mà per sobre del canell tant com li sigui possible.\ref{fig:runnerboy-obstacle}.
 	\begin{figure}[H]
 		\includegraphics[width=0.8\textwidth,keepaspectratio]{runner-boy-obstacle.png}
 		\centering
@@ -426,24 +424,24 @@
 	\subsection{Aplicació de monitoratge}
 	Aquesta aplicació permet als responsables de les teràpies de rehabilitació monitorar les sessions d'exercicis que fan els seus pacients. D'aquesta manera un responsable pot avaluar la millora d'un pacient. De la mateixa manera es poden detectar errors en la realització dels exercicis.
 	
-	L'aplicació de monitoratge consta de 3 parts fonamentals, un \textit{plugin} del controlador \textit{Leap Motion}, un servidor de \textit{web socket} i una aplicació de reproducció dels moviments capturats pel controlador Leap del pacient. La següent figura mostra un esquema de l'arquitectura de l'aplicació de monitoratge.
+	L'aplicació de monitoratge consta de 3 parts fonamentals, un \textit{plugin} del controlador \textit{Leap Motion}, un servidor de \textit{web socket} i una aplicació de reproducció dels moviments capturats pel controlador \textit{Leap} del pacient. La següent figura mostra un esquema de l'arquitectura de l'aplicació de monitoratge.
 	\begin{figure}[H]
 		\includegraphics[width=0.8\textwidth,keepaspectratio]{esquema-monitoritzacio.png}
 		\centering
 		\caption{Arquitectura de l'aplicació de monitorització.}
 		\label{fig:arquitectura-monitoratge}
 	\end{figure}
-	Així, un pacient es connecta a un dels jocs definits anteriorment, i mentre l'usuari juga, un plugin del Leap Motion va enviant les dades capturades a un servidor de web socket utilitzant una estructura determinada, a la vegada, aquest servidor s'encarrega de guardar les dades rebudes a un fitxer. Després en un altre moment, un dels responsables de la teràpia d'aquest pacient, es connecta a l'aplicació de monitoratge per tal de reproduir la sessió de joc del seu pacient. En aquest cas el servidor web l'únic que fa es servir les aplicacions als usuaris i el fitxer de la sessió de joc cap a l'aplicació de monitoratge.
+	Així, un pacient es connecta a un dels jocs definits anteriorment, i mentre l'usuari juga, un \textit{plugin} del \textit{Leap Motion} va enviant les dades capturades a un servidor de \textit{web socket} utilitzant una estructura determinada, a la vegada, aquest servidor s'encarrega de guardar les dades rebudes a un fitxer. Després en un altre moment, un dels responsables de la teràpia d'aquest pacient, es connecta a l'aplicació de monitoratge per tal de reproduir la sessió de joc del seu pacient. En aquest cas el servidor web l'únic que fa es servir les aplicacions als usuaris i el fitxer de la sessió de joc cap a l'aplicació de monitoratge.
 	\begin{description}
-		\item[Network plugin] aquest és un \textit{plugin} que segueix la mateixa filosofia que els plugins ja disponibles pel \textit{Leap Motion} \cite{leapjsplugins}. El primer que fa el \textit{plugin} és connectar-se a un servidor de web socket. Després quan el controlador Leap Motion comença a enviar dades, aquest plugin les captura i les envia al servidor de \textit{socket} utilitzant una estructura determinada.
-		\item[Web socket] un servidor de \textit{web socket} tradicional que accepta connexions del plugin del \textit{Leap Motion} i escolta els esdeveniments d'aquestes connexions. Quan rep una connexió nova, crea un fitxer de text i una vegada creat el fitxer de text, va escrivint les dades rebudes a través del \textit{socket} al fitxer de text en format JSON. Una vegada que el plugin tanca la connexió amb el servidor, aquest darrer rep un esdeveniment de desconnexió i deixa el fitxer disponible per ser reproduït per l'aplicació de monitoratge.
+		\item[Network plugin] aquest és un \textit{plugin} que segueix la mateixa filosofia que els \textit{plugins} ja disponibles pel \textit{Leap Motion} \cite{leapjsplugins}. El primer que fa el \textit{plugin} és connectar-se a un servidor de web socket. Després quan el controlador \textit{Leap Motion} comença a enviar dades, aquest \textit{plugin} les captura i les envia al servidor de \textit{socket} utilitzant una estructura determinada.
+		\item[Web socket] un servidor de \textit{web socket} tradicional que accepta connexions del \textit{plugin} del \textit{Leap Motion} i escolta els esdeveniments d'aquestes connexions. Quan rep una connexió nova, crea un fitxer de text i una vegada creat el fitxer de text, va escrivint les dades rebudes a través del \textit{socket} al fitxer de text en format JSON. Una vegada que el \textit{plugin} tanca la connexió amb el servidor, aquest darrer rep un esdeveniment de desconnexió i deixa el fitxer disponible per ser reproduït per l'aplicació de monitoratge.
 		\item[Visor de monitoratge] és una aplicació web que es connecta al controlador \textit{Leap Motion}, i utilitza les dades del fitxer, creat pel servidor de socket, per reproduir els moviments de la mà que ha realitzat l'usuari del joc.
 		
 		Com si es tractàs d'un fitxer de vídeo, aquesta aplicació permet pausar la reproducció dels moviments, així com moure's endavant i enrere. Per tal de facilitar la revisió dels moviments, els usuaris d'aquesta aplicació també tenen la capacitat de rotar la mà que es veu a la reproducció i modificar el zoom de la imatge.
 	\end{description}
 	La següent imatge mostra com veuen els responsables de les teràpies, la reproducció dels exercicis realitzats pels seus pacients.
 	\begin{figure}[H]
-		\includegraphics[width=0.8\textwidth,keepaspectratio]{esquema-monitoritzacio.png}
+		\includegraphics[width=0.8\textwidth,keepaspectratio]{playback-simple.png}
 		\centering
 		\caption{Visor de l'aplicació de monitoratge.}
 		\label{fig:playback-simple}
@@ -472,6 +470,12 @@
 		\item[Leapjs Plugin] és un \textit{plugin} per al \textit{software} de \textit{Leap Motion} per a \textit{JavaScript} que permet la reproducció dels fotogrames capturats pel controlador \textit{Leap Motion}. Utilitzat en la implementació de l'aplicació de monitoratge.
 		\item[Webpack] és un agregador de mòduls per a \textit{JavaScript}. La seva funció és recopilar els mòduls que utilitza una aplicació i generar un sol fitxer estàtic que representa aquells mòduls. Això ens permet mantenir un enfocament modular a l'hora de desenvolupar aplicacions web.
 	\end{description}
+	\begin{figure}[H]
+		\includegraphics[width=0.8\textwidth,keepaspectratio]{technologies.png}
+		\centering
+		\caption{Relació entre les diferents tecnologies utilitzades.}
+		\label{fig:technolgies}
+	\end{figure}
 	\subsection{Detalls d'implementació}
 	Per al desenvolupament del projecte i la consecució dels objectius prevists, s'han implementat els següents sistemes i aplicacions.
 	\begin{description}
@@ -480,7 +484,7 @@
 		\item[Runner boy] videojoc \textit{HTML5} desenvolupat utilitzant la llibreria \textit{Phaser.io}. Està dedicat a exercitar el moviment de flexió del canell.
 		\item[Cubes Road] videojoc \textit{HTML5} en 3D desenvolupat utilitzant la llibreria \textit{Three.js}. Té com a objectiu exercitar els moviments d'abducció i adducció del canell.
 		\item[Catch Stars] videojoc \textit{HTML5} desenvolupat únicament amb l'element \textit{HTML5} \textit{canvas}. L'objectiu principal d'aquest joc és exercitar els moviments d'abducció i adducció dels dits cor i anular. D'altra banda un altre objectiu d'implementar el joc utilitzant només la API dels elements canvas, ha estat comparar com és la creació d'un videojoc utilizant APIs bàsiques com les de \textit{canvas}, en vers a la utilització de llibreries com \textit{Phaser.io} i \textit{Three.js} que faciliten molts processos.
-		\item[LeapJS Network plugin] plugin propi desenvolupat seguint la filosofia dels \textit{plugins} ja disponibles per \textit{Leapjs}. La seva funció és enviar les dades de seguiment del controlador \textit{Leap Motion}, a un servidor de \textit{web socket}.
+		\item[LeapJS Network plugin] \textit{plugin} propi desenvolupat seguint la filosofia dels \textit{plugins} ja disponibles per \textit{Leapjs}. La seva funció és enviar les dades de seguiment del controlador \textit{Leap Motion}, a un servidor de \textit{web socket}.
 		\item[Aplicació de monitoratge] una aplicació web que utilitza el \textit{plugin} \textit{leapjs-playback} per reproduir les dades de seguiment del \textit{Leap Motion}. Per tal de reproduir els moviments, utilitza el fitxer guardat pel servidor de \textit{web socket}.
 	\end{description}
 	A continuació es descriuen de manera detallada els aspectes més interessants de la implementació d'aquests sistemes i aplicacions.
@@ -489,21 +493,21 @@
 	
 	S'ha desenvolupat utilitzant el \textit{framework} \textit{Express.js} ja que aquest simplifica moltes de les configuracions que necessita una servidor web, és pot implementar un servidor web senzill amb un parell de línies de codi.
 	\begin{figure}[H]
-		\begin{lstlisting}[]
-		const express = require('express');
-		const app = express();
-		
-		const PORT = 3000;
-		app.get('/greeting', (req, res) => {
-		  res.send('Hello World!');
-		})
-		
-		app.use(
-			express.static(path.resolve(__dirname, 'games')));
-		
-		app.listen(PORT, () => {
-		  console.log(`App listening on port ${PORT}!`);
-		});
+		\begin{lstlisting}[gobble=12, tabsize=4]
+			const express = require('express');
+			const app = express();
+			
+			const PORT = 3000;
+			app.get('/greeting', (req, res) => {
+			  res.send('Hello World!');
+			})
+			
+			app.use(
+				express.static(path.resolve(__dirname, 'games')));
+			
+			app.listen(PORT, () => {
+			  console.log(`App listening on port ${PORT}!`);
+			});
 		\end{lstlisting}
 		\caption{Codi bàsic d'un servidor Express.js.}
 		\label{fig:express-basic}
@@ -511,111 +515,111 @@
 	\subsubsection{Servidor socket}
 	Aquest servidor, desenvolupat mitjançant la llibreria \textit{Socket.io}, s'encarrega de rebre les connexions del \textit{plugin} de \textit{Leap Motion} i generar els fitxers de les sessions de joc.
 	
-	El seu paper més important és generar el fitxer de les sessions de joc utilitzant l'estructura adecuada, que després podrà ser reproduïda utilitzant el plugin de reproducció \textit{leapjs-playback}. A continuació es mostra quina és l'estructura de dades que ha de guardar el servidor de \textit{web socket} en el fitxer.
+	El seu paper més important és generar el fitxer de les sessions de joc utilitzant l'estructura adecuada, que després podrà ser reproduïda utilitzant el \textit{plugin} de reproducció \textit{leapjs-playback}. A continuació es mostra quina és l'estructura de dades que ha de guardar el servidor de \textit{web socket} en el fitxer.
 	\begin{figure}[H]
-	\begin{lstlisting}[]
-	{
-	  metadata: {
-	    formatVersion: 2,
-	    generatedBy: 'Socket.io saver',
-	    frames: 0,
-	    protocolVersion: 6,
-	    frameRate: '1.1e+2',
-	    modified: new Date()
-	  },
-	  frames: [packingStructure]
-	}
-	\end{lstlisting}
+		\begin{lstlisting}[gobble=12, tabsize=4]
+			{
+			  metadata: {
+			    formatVersion: 2,
+			    generatedBy: 'Socket.io saver',
+			    frames: 0,
+			    protocolVersion: 6,
+			    frameRate: '1.1e+2',
+			    modified: new Date()
+			  },
+			  frames: [packingStructure]
+			}
+		\end{lstlisting}
 		\caption{Estructura del fitxer de sessió de joc.}
 		\label{fig:recording-structure}
 	\end{figure}
 	Les meta dades vénen determinades pel \textit{plugin} de reproducció y la majoria són constants o són regenerades a l'hora de reproducció del \textit{plugin}, com és el cas del \textit{frameRate} (ràtio de fotogrames).
 	
-	Les dades de seguiment del Leap es guarden en forma de \textit{Array} de fotogrames a la propietat \textit{frames}, amb l'única peculiaritat que el primer element de la \textit{Array} descriu l'estructura amb què es guarda cada fotograma. Aquest estructura amb què es guarda cada fotograma serà descrita a l'apartat de \textit{Network Plugin}, ja que és el plugin desenvolupat el que s'encarrega de generar les dades amb l'estructura adequada i enviar-les.
+	Les dades de seguiment del \textit{Leap} es guarden en forma de \textit{Array} de fotogrames a la propietat \textit{frames}, amb l'única peculiaritat que el primer element de la \textit{Array} descriu l'estructura amb què es guarda cada fotograma. Aquest estructura amb què es guarda cada fotograma serà descrita a l'apartat de \textit{Network Plugin}, ja que és el \textit{plugin} desenvolupat el que s'encarrega de generar les dades amb l'estructura adequada i enviar-les.
 	
 	El Servidor utilitza el que \textit{Socket.io} defineix com a \textit{namespace} per tal d'atendre les connexions de cada un dels jocs. Un “namespace” es pot entendre com una sala en la qual els \textit{sockets} es poden comunicar entre si, d'aquesta manera un servidor pot enviar missatges a tots els \textit{sockets} connectats a una sola sala i només als d'aquella sala.
 	Es defineix una sala per a cada videojoc, d'aquesta manera:
 	\begin{figure}[H]
-	\begin{lstlisting}[]
-	io.of('/catch-stars')
-	  .on('connection', leapRecorder);
-	io.of('/runner-boy')
-	  .on('connection', leapRecorder);
-	io.of('cubes-road')
-	  .on('connection', leapRecorder);
-	\end{lstlisting}
+		\begin{lstlisting}[gobble=12, tabsize=4]
+			io.of('/catch-stars')
+			  .on('connection', leapRecorder);
+			io.of('/runner-boy')
+			  .on('connection', leapRecorder);
+			io.of('cubes-road')
+			  .on('connection', leapRecorder);
+		\end{lstlisting}
 		\caption{Sales del servidor de socket}
 		\label{fig:socket-namespaces}
 	\end{figure}
 	Com es pot veure totes les connexions a les diferents sales, són manegades per la mateixa funció \textit{leaprecorder}. Tot i que pot parèixer innecessari crear una sala per a cada videojoc, d'aquesta manera és més fàcil generar fitxers amb noms diferents per a cada videojoc, a més el codi queda més estructurat de cara al futur.
 	La funció \textit{leapRecorder} rep com a paràmetre un objecte \textit{Socket} i serà a través d'aquest que es rebran els esdeveniments enviats pel \textit{plugin}.
 	\begin{figure}[H]
-	\begin{lstlisting}[]
-	function leapRecorder(socket){
-	  let fileName = socket.id.substring(socket.nsp.name.length + 1);
-	  fileName = socket.nsp.name.substring(1) + '-' + fileName + '.json';
-	  const ws = fs.createWriteStream(fileName);
-	  const fileData = {
-	    metadata: {
-	      formatVersion: 2,
-	      generatedBy: 'Socket.io saver',
-	      frames: 0,
-	      protocolVersion: 6,
-	      frameRate: '1.1e+2',
-	      modified: new Date()
-	    },
-	    frames: [packingStructure]
-	  }
-	  const str = JSON.stringify(fileData);
-	  ws.write(str.substring(0, str.length - 2));
-	
-	  socket.on('disconnect', () => {
-	    ws.write(']}');
-	    ws.close();
-	  });
-	
-	  socket.on('frameBuffer', data => {
-	    let buffer = JSON.stringify(data[0]);
-	    for (let i = 1; i < data.length; i++) {
-	      buffer = buffer + ',' + JSON.stringify(data[i]);
-	    }
-	    ws.write(',' + buffer);
-	  });
-	}
-	\end{lstlisting}
+		\begin{lstlisting}[gobble=12, tabsize=4]
+			function leapRecorder(socket){
+			  let fileName = socket.id.substring(socket.nsp.name.length + 1);
+			  fileName = socket.nsp.name.substring(1) + '-' + fileName + '.json';
+			  const ws = fs.createWriteStream(fileName);
+			  const fileData = {
+			    metadata: {
+			      formatVersion: 2,
+			      generatedBy: 'Socket.io saver',
+			      frames: 0,
+			      protocolVersion: 6,
+			      frameRate: '1.1e+2',
+			      modified: new Date()
+			    },
+			    frames: [packingStructure]
+			  }
+			  const str = JSON.stringify(fileData);
+			  ws.write(str.substring(0, str.length - 2));
+			
+			  socket.on('disconnect', () => {
+			    ws.write(']}');
+			    ws.close();
+			  });
+			
+			  socket.on('frameBuffer', data => {
+			    let buffer = JSON.stringify(data[0]);
+			    for (let i = 1; i < data.length; i++) {
+			      buffer = buffer + ',' + JSON.stringify(data[i]);
+			    }
+			    ws.write(',' + buffer);
+			  });
+			}
+		\end{lstlisting}
 		\caption{Funció principal del servidor de socket}
 		\label{fig:leap-recorder}
 	\end{figure}
 	Val la pena descriure breument el funcionament d'aquesta funció.
 	Quan un client es connecta al servidor, es crea un fitxer amb l'estructura descrita anteriorment. El fitxer es guarda en format JSON (\textit{JavaScript Object Notation}, en anglès). En concret, del text resultant de convertir l'objecte a JSON, es guarda tot llevat dels dos darrers caràcters.
-	\begin{lstlisting}
-	ws.write(str.substring(0, str.length - 2));
+	\begin{lstlisting}[gobble=8, tabsize=4]
+		ws.write(str.substring(0, str.length - 2));
 	\end{lstlisting}
 	Això serà el que permetrà anar afegint les dades rebudes periòdicament dins de l'array \textit{frames}, sense haver de regenerar cada vegada l'objecte complet.
 	Així, quan el \textit{plugin} envia un missatge de dades del \textit{Leap Motion}, aquestes són afegides directament al final del fitxer en format JSON.
 	\begin{figure}[H]
-	\begin{lstlisting}[]
-	socket.on('frameBuffer', data => {
-	  let buffer = JSON.stringify(data[0]);
-	  for (let i = 1; i < data.length; i++) {
-	    buffer = buffer + ',' + JSON.stringify(data[i]);
-	  }
-	  ws.write(',' + buffer);
-	});
-	\end{lstlisting}
+		\begin{lstlisting}[gobble=12, tabsize=4]
+			socket.on('frameBuffer', data => {
+			  let buffer = JSON.stringify(data[0]);
+			  for (let i = 1; i < data.length; i++) {
+			    buffer = buffer + ',' + JSON.stringify(data[i]);
+			  }
+			  ws.write(',' + buffer);
+			});
+		\end{lstlisting}
 		\caption{funció que atén les dades de seguiment}
 		\label{fig:socket-frame-data}
 	\end{figure}
-	Com es pot veure, dins del missatge de dades del \textit{plugin}, no arriba només un fotograma capturat pel \textit{Leap Motion}, sinó que arriben múltiples fotogrames. Això s'ha fet així per tal d'optimitzar la utilització de xarxa del \textit{plugin}, ja que el ràtio de fotogrames per segon produït pel controlador Leap Motion, pot ser molt gran.
+	Com es pot veure, dins del missatge de dades del \textit{plugin}, no arriba només un fotograma capturat pel \textit{Leap Motion}, sinó que arriben múltiples fotogrames. Això s'ha fet així per tal d'optimitzar la utilització de xarxa del \textit{plugin}, ja que el ràtio de fotogrames per segon produït pel controlador \textit{Leap Motion}, pot ser molt gran.
 	
 	Finalment, una vegada l'usuari tanca el joc, el servidor detecta la desconnexió de l'usuari i tanca el fitxer. Per tal que el fitxer contingui un JSON ben format, s'han d'afegir els dos caràcters que s'han omès a l'inici de la connexió.
 	\begin{figure}[H]
-	\begin{lstlisting}[]
-	socket.on('disconnect', () => {
-	  ws.write(']}');
-	  ws.close();
-	});
-	\end{lstlisting}
+		\begin{lstlisting}[gobble=12, tabsize=4]
+			socket.on('disconnect', () => {
+			  ws.write(']}');
+			  ws.close();
+			});
+		\end{lstlisting}
 		\caption{Event de desconnexió}
 		\label{fig:socket-disconnect}
 	\end{figure}
@@ -675,34 +679,34 @@
 	
 	La següent figura mostra el bucle principal del joc:
 	\begin{figure}[H]
-	\begin{lstlisting}[]
-	animate(tFrame) {
-		if (this.state === 'Playing') {
-			requestAnimationFrame(this.animate.bind(this));
-		}
-		const pickerXPos = getPosition(
-			(-roadWidth / 2) + 75, (roadWidth / 2) - 75);
-		if (pickerXPos) {
-			this.picker.position.x = pickerXPos;
-			this.picker.needsUpdate();
-		}
-		if (tFrame - this.tCube > this.cubesInterval){
-			if (tFrame - this.tEnemy > this.enemiesInterval) {
-				this.tEnemy = tFrame;
-				this.tCube = tFrame;
-				this.addEnemy();
-			}else {
-				this.tCube = tFrame;
-				this.addCube();
+		\begin{lstlisting}[gobble=12, tabsize=4]
+			animate(tFrame) {
+				if (this.state === 'Playing') {
+					requestAnimationFrame(this.animate.bind(this));
+				}
+				const pickerXPos = getPosition(
+					(-roadWidth / 2) + 75, (roadWidth / 2) - 75);
+				if (pickerXPos) {
+					this.picker.position.x = pickerXPos;
+					this.picker.needsUpdate();
+				}
+				if (tFrame - this.tCube > this.cubesInterval){
+					if (tFrame - this.tEnemy > this.enemiesInterval) {
+						this.tEnemy = tFrame;
+						this.tCube = tFrame;
+						this.addEnemy();
+					}else {
+						this.tCube = tFrame;
+						this.addCube();
+					}
+				}
+				this.handleMisses();
+				this.scene.simulate();
+				this.renderer.render(this.scene, this.camera);
 			}
-		}
-		this.handleMisses();
-		this.scene.simulate();
-		this.renderer.render(this.scene, this.camera);
-	}
-	\end{lstlisting}
-	\caption{Bucle principal del joc.}
-	\label{fig:cubes-road-animate}
+		\end{lstlisting}
+		\caption{Bucle principal del joc.}
+		\label{fig:cubes-road-animate}
 	\end{figure}
 	El bucle està controlat per la funció \textit{requestAnimationFrame} \cite{request-animation-frame}, aquesta funció avisa al navegador de que es vol realitzar una animació i fa que aquest cridi a una funció just abans del pròxim repintat de pantalla.
 	
@@ -728,46 +732,46 @@
 	
 	D'aquesta manera, l'objecte joc dóna d'alta el que es coneix com a funció \textit{handler} o \textit{callback}, que és una funció que atén un esdeveniment o que és cridada per retornar la resposta a una funció, per atendre els esdeveniments de col·lisió que origina l'objecte \textit{Picker}.
 	\begin{figure}[H]
-	\begin{lstlisting}[]
-	initPicker() {
-		this.picker = new Picker(this.scene);
-		this.picker.position.y = CUBES_HEIGHT;
-		this.picker.position.z = PICKER_Z_POSITION;
-		this.picker.addToScene();
-		this.picker.addEventListener('collision', this.onCubePicked.bind(this));
-	}
-	\end{lstlisting}
-	\caption{Inicialització de l'objecte \textit{picker}}
-	\label{fig:picker-init}
+		\begin{lstlisting}[gobble=12, tabsize=4]
+			initPicker() {
+				this.picker = new Picker(this.scene);
+				this.picker.position.y = CUBES_HEIGHT;
+				this.picker.position.z = PICKER_Z_POSITION;
+				this.picker.addToScene();
+				this.picker.addEventListener('collision', this.onCubePicked.bind(this));
+			}
+		\end{lstlisting}
+		\caption{Inicialització de l'objecte \textit{picker}}
+		\label{fig:picker-init}
 	\end{figure}
 	Així, cada vegada que l'objecte \textit{picker} col·lisiona amb un altre objecte dins l'escena, la funció \textit{onCubePicked} és cridada.
 	\begin{figure}[H]
-	\begin{lstlisting}[]
-	onCubePicked(cubeMesh, relVelocity, relRotation, contactNormal){
-		this.particlesHolder.spawnParticles(
-		cubeMesh.position.clone(), 10, cubeMesh.material.color, .8);
-		this.scene.remove(cubeMesh);
-		if (this.cubesMap.get(cubeMesh) instanceof EnemyCube) {
-			this.picker.shrink();
-		}else {
-			this.score += 10;
-			this.scoreText.innerHTML = `score ${this.score}`;
-			this.level = Math.floor(this.score / 50);
-			if (this.score % 50 === 0) {
-				this.cubesInterval = Math.max(
-				this.cubesInterval - this.cubesIntervalStep, this.maxCubesInterval);
-				this.velocity = Math.min(
-				this.velocity + this.velocityStep, this.maxVelocity);
+		\begin{lstlisting}[gobble=12, tabsize=4]
+			onCubePicked(cubeMesh, relVelocity, relRotation, contactNormal){
+				this.particlesHolder.spawnParticles(
+				cubeMesh.position.clone(), 10, cubeMesh.material.color, .8);
+				this.scene.remove(cubeMesh);
+				if (this.cubesMap.get(cubeMesh) instanceof EnemyCube) {
+					this.picker.shrink();
+				}else {
+					this.score += 10;
+					this.scoreText.innerHTML = `score ${this.score}`;
+					this.level = Math.floor(this.score / 50);
+					if (this.score % 50 === 0) {
+						this.cubesInterval = Math.max(
+						this.cubesInterval - this.cubesIntervalStep, this.maxCubesInterval);
+						this.velocity = Math.min(
+						this.velocity + this.velocityStep, this.maxVelocity);
+					}
+					if (this.score % 100 === 0) {
+						this.shrinkCubes();
+					}
+				}
+				this.cubesMap.delete(cubeMesh);
 			}
-			if (this.score % 100 === 0) {
-				this.shrinkCubes();
-			}
-		}
-		this.cubesMap.delete(cubeMesh);
-	}
-	\end{lstlisting}
-	\caption{Funció que atén les col·lisions dels cubs.}
-	\label{fig:oncubepicked}
+		\end{lstlisting}
+		\caption{Funció que atén les col·lisions dels cubs.}
+		\label{fig:oncubepicked}
 	\end{figure}
 	La funció rep varis paràmetres que donen informació sobre la col·lisió entre els objectes, l'únic que s'utilitza és el primer, que és una referència a l'objecte amb el qual ha col·lisionat el jugador. Cal recordar, que aquesta funció és un mètode de la classe principal Game i per tant, l'objecte \textit{this} fa referència a l'objecte de la classe Game.
 	El primer que es fa quan es detecta una col·lisió, és generar un efecte visual que crea múltiples partícules en el lloc de la col·lisió i genera un efecte similar a una explosió, d'això se n'encarrega l'objecte \textit{particlesHolder}. No s'entrarà en més detalls per no tractar-se d'una funcionalitat del joc, sinó d'un simple efecte visual per remarcar que el jugador ha capturat un cub.
@@ -799,29 +803,29 @@
 	Després de construir una instància de la classe \textit{CatchStarGame}, el joc comença amb el mètode \textit{start} de la mateixa classe.
 	
 	\begin{figure}[H]
-	\begin{lstlisting}[]
-	start() {
-		this.reset();
-		this.clear();
-		this.stars = new Group(this);
-		
-		const mid = Math.floor(this.width / 2);
-		this.lPicker = new Picker(
-		this, 30, 30, 'red', mid - 90, this.height - 100, 'left');
-		this.rPicker = new Picker(
-		this, 30, 30, 'red', mid + 60, this.height - 100, 'right');
-		
-		this.scoreComponent = new Component(
-		this, '30px', 'Consolas', 'white', this.width - 200, 40, 'text');
-		this.scoreComponent.text = 'SCORE:   0';
-		this.lifesComponent = new Component(
-		this, '30px', 'Consolas', 'white', this.width - 200, 80, 'text');
-		this.lifesComponent.text = 'LIFES:   ' + this.lifes;
-		window.requestAnimationFrame(this.animate.bind(this));
-	}
-	\end{lstlisting}
-	\caption{Mètode d'inici del joc.}
-	\label{fig:start-method}
+		\begin{lstlisting}[gobble=12, tabsize=4]
+			start() {
+				this.reset();
+				this.clear();
+				this.stars = new Group(this);
+				
+				const mid = Math.floor(this.width / 2);
+				this.lPicker = new Picker(
+				this, 30, 30, 'red', mid - 90, this.height - 100, 'left');
+				this.rPicker = new Picker(
+				this, 30, 30, 'red', mid + 60, this.height - 100, 'right');
+				
+				this.scoreComponent = new Component(
+				this, '30px', 'Consolas', 'white', this.width - 200, 40, 'text');
+				this.scoreComponent.text = 'SCORE:   0';
+				this.lifesComponent = new Component(
+				this, '30px', 'Consolas', 'white', this.width - 200, 80, 'text');
+				this.lifesComponent.text = 'LIFES:   ' + this.lifes;
+				window.requestAnimationFrame(this.animate.bind(this));
+			}
+		\end{lstlisting}
+		\caption{Mètode d'inici del joc.}
+		\label{fig:start-method}
 	\end{figure}
 	El primer que fa la funció és cridar a la funció \textit{reset}, aquesta funció configura els valors inicials del joc, com per exemple, puntuació 0, velocitat inicial de les estrelles, etc.
 	Després, crida a la funció \textit{clear}, aquesta funció esborra tot el que hi hagi pintat dins l'element \textit{canvas} pintant un quadrat negre de la mida exacte del \textit{canvas}, aquest serà el fons del joc. Si el joc no ha començat encara, no hi ha res a esborrar, però com es veurà més endavant, aquesta mateixa funció serà cridada en el bucle principal del joc abans de repintar els components.
@@ -834,18 +838,18 @@
 	
 	El bucle principal del joc és el següent:
 	\begin{figure}[H]
-	\begin{lstlisting}[]
-	animate(tFrame) {
-		this.animationId = window.requestAnimationFrame(this.animate.bind(this));
-		this.clear();
-		
-		this.update(tFrame);
-		this.render();
-		this.lastRender = tFrame;
-	}
-	\end{lstlisting}
-	\caption{Bucle principal}
-	\label{fig:catch-stars-loop}
+		\begin{lstlisting}[gobble=12, tabsize=4]
+			animate(tFrame) {
+				this.animationId = window.requestAnimationFrame(this.animate.bind(this));
+				this.clear();
+				
+				this.update(tFrame);
+				this.render();
+				this.lastRender = tFrame;
+			}
+		\end{lstlisting}
+		\caption{Bucle principal}
+		\label{fig:catch-stars-loop}
 	\end{figure}
 	El primer que fa és reservar la pròxima iteració del joc per utilitzant una altra vegada la funció \textit{requestAnimationFrame}.
 	
@@ -855,22 +859,22 @@
 	
 	Com s'ha comentat, la funció update, crida a les funcions d'actualització dels diferents components.
 	\begin{figure}[H]
-	\begin{lstlisting}[]
-	update(tFrame) {
-		if (tFrame - this.lastStar > this.starsInterval) {
-			this.addStar(tFrame);
-		}
-		
-		this.lPicker.update();
-		this.rPicker.update();
-		
-		this.stars.update();
-	}
-	\end{lstlisting}
-	\caption{Funció d'actualització principal.}
-	\label{fig:catch-stars-update}
+		\begin{lstlisting}[gobble=12, tabsize=4]
+			update(tFrame) {
+				if (tFrame - this.lastStar > this.starsInterval) {
+					this.addStar(tFrame);
+				}
+				
+				this.lPicker.update();
+				this.rPicker.update();
+				
+				this.stars.update();
+			}
+		\end{lstlisting}
+		\caption{Funció d'actualització principal.}
+		\label{fig:catch-stars-update}
 	\end{figure}
-	Tant \textit{lPicker} com \textit{rPicker} són els components que controla l'usuari mitjançant el controlador \textit{Leap Motion}. D'aquesta manera, el mètode \textit{update} de la classe \textit{Picker} ha d'obtenir les dades de posició del Leap Motion per actualitzar la posició del component.
+	Tant \textit{lPicker} com \textit{rPicker} són els components que controla l'usuari mitjançant el controlador \textit{Leap Motion}. D'aquesta manera, el mètode \textit{update} de la classe \textit{Picker} ha d'obtenir les dades de posició del \textit{Leap Motion} per actualitzar la posició del component.
 	Per això s'ha hagut d'implementar una funció que calculi la distància entre dos dits a partir de les dades de seguiment del \textit{Leap Motion}.
 	\begin{figure}[H]
 		\begin{lstlisting}[gobble=12, tabsize=4]
@@ -903,8 +907,8 @@
 				return output;
 			}
 		\end{lstlisting}
-		\caption{Funció d'actualització principal.}
-		\label{fig:catch-stars-update}
+		\caption{Funció de càlcul de distància entre dos dits.}
+		\label{fig:catch-stars-leap-controls}
 	\end{figure}
 	Aquesta funció agafa les dades de dos dits, els noms dels quals arriben per paràmetre, i calcula dades com la distància entre les puntes dels dos dits, l'angle que hi ha entre ells així com quina és la distància mínima i màxima de separació que ha realitzat l'usuari amb aquells dos dits.
 	En funció de la distància actual i les distàncies mínimes i màximes, el mètode \textit{update} de la classe \textit{Picker} calcula quina és la seva nova posició.
@@ -921,7 +925,7 @@
 	\begin{figure}[H]
 		\begin{lstlisting}[gobble=12, tabsize=4]
 			update() {
-				for (let [id, c] of this.components) { // eslint-disable-line no-unused-vars
+				for (let [id, c] of this.components) {
 					c.update();
 					if (c.type === 'star' && ! c.collided) {
 						if (c.crashWith(this.game.lPicker)) {
@@ -952,7 +956,7 @@
 	\subsubsection{Network plugin}
 	Com s'ha descrit a l'apartat de disseny, aquest és un \textit{plugin} per al controlador \textit{Leap Motion} que es connecta a un servidor de \textit{web socket} i envia periòdicament les dades de seguiment capturades.
 	
-	La funció “Leap.plugin(name, function)” registra un \textit{plugin} per al controlador Leap Motion de tal manera que el desenvolupador és capaç de dir al la API del \textit{Leap Motion} que utilitzi un \textit{plugin} prèviament registrat, utilitzant la funció “Leap.use(name, options)”
+	La funció “Leap.plugin(name, function)” registra un \textit{plugin} per al controlador \textit{Leap Motion} de tal manera que el desenvolupador és capaç de dir al la API del \textit{Leap Motion} que utilitzi un \textit{plugin} prèviament registrat, utilitzant la funció “Leap.use(name, options)”
 	
 	La següent figura mostra les parts més rellevants del registre del \textit{plugin}.
 	\begin{figure}[H]
@@ -993,16 +997,16 @@
 	\end{figure}
 	S'han eliminat les parts menys rellevants per l'estudi.
 	
-	En termes generals, la funció que \textit{Leap.plugin} rep com a segon paràmetre, defineix una sèrie de funcions internes i retorna un objecte. Aquest objecte és utilitzat per l'API del Leap Motion quan es crida a la funció “Leap.use”.
+	En termes generals, la funció que \textit{Leap.plugin} rep com a segon paràmetre, defineix una sèrie de funcions internes i retorna un objecte. Aquest objecte és utilitzat per l'API del \textit{Leap Motion} quan es crida a la funció “Leap.use”.
 	
-	En el nostre cas, l'objecte retornat pel \textit{plugin} només defineix una propietat \textit{beforeFrameCreated}, la qual representa una funció que serà cridada amb les dades del pròxim \textit{frame} (fotograma), abans que aquest sigui retornat per cap mètode de la API.
+	En el nostre cas, l'objecte retornat pel \textit{plugin} només defineix una propietat \textit{beforeFrameCreated}, la qual representa una funció que serà cridada amb les dades del pròxim \textit{frame} (fotograma), abans que aquest sigui retornat per cap dels mètodes de la API.
 	Aquí és on el nostre \textit{plugin} agafa les dades de seguiment, les empaqueta utilitzant una estructura determinada i les envia al servidor de \textit{web socket}.
 	
 	A causa del gran nombre de fotogrames que és capaç d'enviar el controlador \textit{Leap Motion}, el \textit{plugin} no envia les dades al servidor per a cada fotograma, sinó que va acumulant les dades ja empaquetades i quan ha empaquetat una quantitat de fotogrames, els envia al servidor. Aquesta quantitat de fotogrames que acumula el \textit{plugin} és configurable a través de la propietat \textit{bufferWindow} (finestra de dades).
 	
 	La utilització d'una finestra de dades com aquesta pot ser beneficiós de cara als requeriments computacionals i de xarxa del \textit{plugin}, però per altra banda, fa que les dades ja no arribin al servidor en temps real, per tant si l'aplicació que utilitza aquest \textit{plugin} necessita una connexió en temps real amb el servidor, sempre es pot definir aquest \textit{bufferWindow} amb el valor 0.
 	
-	L'estructura que s'utilitza per guardar les dades és la mateixa que utilitza el plugin \textit{leapjs-playback} \cite{leapjs-playback} per reproduir les dades del Leap Motion. Així quan les dades es guarden a un fitxer, ja estan disponibles per ser reproduïdes utilitzant el \textit{plugin} de \textit{playback}.
+	L'estructura que s'utilitza per guardar les dades és la mateixa que utilitza el \textit{plugin} \textit{leapjs-playback} \cite{leapjs-playback} per reproduir les dades del \textit{Leap Motion}. Així quan les dades es guarden a un fitxer, ja estan disponibles per ser reproduïdes utilitzant el \textit{plugin} de \textit{playback}.
 	La següent figura mostra quines són les dades enviades al servidor així com també l'estructura utilitzada per enviar-les.
 	\begin{figure}[H]
 		\begin{lstlisting}[gobble=12, tabsize=4]
@@ -1032,7 +1036,7 @@
 		\label{fig:packaging-structure}
 	\end{figure}
 	\subsubsection{Aplicació de monitoratge}
-	És una aplicació web que utilitza la llibreria \textit{Three.js} i els plugins de Leap Motion \textit{leapjs-playback} i \textit{leapjs-rigged-hand}, per crear una escena en tres dimensions on es visualitza una mà realitzant els mateixos moviments que ha realitzat l'usuari durant la seva sessió de joc.
+	És una aplicació web que utilitza la llibreria \textit{Three.js} i els \textit{plugins} de \textit{Leap Motion} \textit{leapjs-playback} i \textit{leapjs-rigged-hand}, per crear una escena en tres dimensions on es visualitza una mà realitzant els mateixos moviments que ha realitzat l'usuari durant la seva sessió de joc.
 	
 	A part de la inicialització de l'escena 3D, la major part de la implementació d'aquesta aplicació ha estat configuració dels \textit{plugins} mencionats.
 	\begin{figure}[H]
@@ -1062,9 +1066,9 @@
 		\caption{Configuració dels \textit{plugins} per a l'aplicació.}
 		\label{fig:monitoring-web}
 	\end{figure}
-	L'aplicació utilitza varis plugins ja disponibles per a \textit{leapjs}, \textit{transform}, \textit{playback} i \textit{riggedHand}.
+	L'aplicació utilitza varis \textit{plugins} ja disponibles per a \textit{leapjs}, \textit{transform}, \textit{playback} i \textit{riggedHand}.
 	
-	El plugin \textit{transform} s'utilitza per alterar les posicions de la mà dins l'escena. Utilitzant aquest \textit{plugin} es poden traslladar les coordenades que retorna la API del \textit{Leap Motion}. S'ha configurat per desplaçar les dades del \textit{Leap Motion} 80 punts cap avall en l'eix Y, facilitant la visualització de l'aplicació en pantalles petites.
+	El \textit{plugin} \textit{transform} s'utilitza per alterar les posicions de la mà dins l'escena. Utilitzant aquest \textit{plugin} es poden traslladar les coordenades que retorna la API del \textit{Leap Motion}. S'ha configurat per desplaçar les dades del \textit{Leap Motion} 80 punts cap avall en l'eix Y, facilitant la visualització de l'aplicació en pantalles petites.
 	
 	\textit{Playback}, és el \textit{plugin} que permet reproduir els moviments dels usuaris a partir d'un fitxer. Aquest \textit{plugin} també ofereix la possibilitat de guardar els moviments dels usuaris en fitxers per després reproduir-los.
 	Analitzant les opcions de configuració, podem veure tres opcions, \textit{recording}, \textit{pauseOnHand} i \textit{loop}.
@@ -1114,6 +1118,12 @@
 	Durant el desenvolupament d'aquest projecte, s'ha aconseguit complir amb els objectius plantejats a l'inici del mateix.
 	
 	S'ha descrit la implementació com a prova de concepte, d'un sistema de suport a la rehabilitació de pacients amb lesions a les articulacions de la mà, oferint la possibilitat que aquestes sessions de rehabilitació siguin monitorades i revisades pel responsable de la teràpia.
+	
+	S'han dissenyat tres videojocs diferents, amb els quals els usuaris poden interactuar, mitjançant gestos de la mà o dels dits. Els videojocs s'han dissenyat de tal manera, que la seva interacció simula exercicis freqüents en teràpies de rehabilitació.
+	
+	Per a la implementació d'aquests videojocs, s'han utilitzat tecnologies diferents en cada un, que van des de la utilització de llibreries, que es podrien denominar d'alt nivell, que són capaces de gestionar processos complexos com per exemple, la detecció de col·lisions, fins la utilització de APIs de navegador per realitzar operacions gràfiques de baix nivell.
+	
+	
 	Revisant els requeriments plantejats inicialment, es pot afirmar que el projecte s'ha completat amb èxit, tot i quedar obertes vàries opcions de millora.
 	
 	A títol personal, la realització d'aquest projecte m'ha permès experimentar amb tecnologies de desenvolupament de videojocs i interfícies basades en visió, fins ara desconegudes per a mi, però amb les quals tenia moltes ganes de treballar. Aquest fet ha llastrat possiblement, l'evolució del projecte en les seves fases inicials, però res que no s'hagi pogut suplir amb la diversitat de recursos que es poden trobar actualment a la xarxa.
@@ -1123,6 +1133,6 @@
 	El desenvolupament del projecte, m'ha permès adquirir coneixements en relació al desenvolupament de videojocs i descobrir la gran complexitat que hi pot haver darrera parts aparentment senzilles del seu desenvolupament.
 	
 	També he pogut descobrir la utilitat que poden arribar a tenir les experiències interactives per salut, basades en videojocs, experiències que des del meu punt de vista, actualment, ja podrien tenir una major implantació.
-	
+	\clearpage
 	\printbibliography[heading=bibnumbered,title={Referències}]
 \end{document}

@@ -188,7 +188,7 @@
       \verb 10.1179/1074935714Z.0000000036
       \endverb
     \endentry
-    \entry{tesis-cristina}{phdtesis}{}
+    \entry{tesis-cristina}{thesis}{}
       \name{labelname}{1}{}{%
         {{hash=16bfc9572a62022d25b8ed18e63938db}{Manresa-Yee}{M\bibinithyphendelim Y\bibinitperiod}{Cristina}{C\bibinitperiod}{}{}{}{}}%
       }
@@ -205,6 +205,7 @@
       \field{labeltitle}{Advanced and natural interaction system for motion-impared users}
       \field{isbn}{978-84-692-6461-4}
       \field{title}{Advanced and natural interaction system for motion-impared users}
+      \field{type}{phdthesis}
       \field{year}{2009}
       \field{pages}{1\bibrangedash 213}
     \endentry
