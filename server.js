@@ -18,7 +18,7 @@ controllers.forEach(function(controller) {
   require(controller)(app);
 });
 
-const packingStructureV2 = [
+const packingStructure = [
   'id',
   'timestamp',
   // this should be replace/upgraded with a whitelist instead of a blacklist.
@@ -63,14 +63,11 @@ const packingStructureV2 = [
   ]}
 ];
 
-const gameFiles = new Map();
-
 function leapRecorder(socket){
   let fileName = socket.id.substring(socket.nsp.name.length + 1);
   fileName = socket.nsp.name.substring(1) + '-' + fileName + '.json';
-  // gameFiles.set(socket.id, fs.createWriteStream(fileName));
   const ws = fs.createWriteStream(fileName);
-  const metadata = {
+  const fileData = {
     metadata: {
       formatVersion: 2,
       generatedBy: 'Socket.io saver',
@@ -79,15 +76,14 @@ function leapRecorder(socket){
       frameRate: '1.1e+2',
       modified: new Date()
     },
-    frames: [packingStructureV2]
+    frames: [packingStructure]
   }
-  const str = JSON.stringify(metadata);
+  const str = JSON.stringify(fileData);
   ws.write(str.substring(0, str.length - 2));
 
   socket.on('disconnect', () => {
     ws.write(']}');
     ws.close();
-    gameFiles.delete(socket.id);
   });
 
   socket.on('frameData', (data) => {

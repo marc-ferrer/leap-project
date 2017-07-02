@@ -12,6 +12,7 @@ const INITIAL_LIFES = 1;
 const INITIAL_SCORE = 0;
 const INITIAL_LEVEL = 0;
 const MAX_DISTANCE = 10000;
+const PICKER_Z_POSITION = 300;
 const FOV = 50; // Field Of View from bottom to top of view, in degrees
 const CUBES_INTERVAL = 5000; // ms
 let CUBES_VELOCITY = 300;
@@ -23,22 +24,47 @@ const roadWidth = 600;
 Physijs.scripts.worker = './js/physijs_worker.js';
 Physijs.scripts.ammo = './ammo.js';
 
-class Picker {
-	constructor(scene) {
+class Cube {
+	constructor(scene, size, weight, velocity, color){
 		this.scene = scene;
-		this.color = 0x11ff11;
-		this.xSize = 120;
-		this.ySize = 40;
-		this.zSize = 100;
-		this.xScale = 1;
+		this.weight = weight;
+		this.velocity = velocity;
+		this.points = 10;
+		this.color = color || 0x888888;
+		if (isNaN(size)) {
+			this.width = size[0];
+			this.height = size[1];
+			this.depth = size[2];
+		}else {
+			this.width = size;
+			this.height = size;
+			this.depth = size;
+		}
 
-		this.geometry = new THREE.CubeGeometry(this.xSize, this.ySize, this.zSize);
+		this.geometry = new THREE.CubeGeometry(this.width, this.height, this.depth);
 		this.material = new THREE.MeshLambertMaterial({color: this.color});
-		this.weight = 0;
 		this.mesh = new Physijs.BoxMesh(this.geometry, this.material, this.weight);
 		this.position = this.mesh.position;
-
 		this.mesh.castShadow = true;
+	}
+
+	addToScene(){
+		this.scene.add(this.mesh);
+	}
+
+	needsUpdate(){
+		this.mesh.__dirtyPosition = true;
+	}
+
+	updateVelocity(vel){
+		this.mesh.setLinearFactor(new THREE.Vector3(0, 0, vel));
+		this.mesh.setLinearVelocity(new THREE.Vector3(0, 0, vel));
+	}
+}
+
+class Picker extends Cube{
+	constructor(scene) {
+		super(scene, [120, 40, 100], 0, 0, 0x11ff11);
 		this.mesh.receiveShadow = false;
 
 		this.mesh.setLinearFactor(new THREE.Vector3(0, 0, 0));
@@ -47,16 +73,8 @@ class Picker {
 		this.mesh.setAngularVelocity(new THREE.Vector3(0, 0, 0));
 	}
 
-	addToScene(){
-		this.scene.add(this.mesh);
-	}
-
 	addEventListener(event, handler){
 		this.mesh.addEventListener(event, handler);
-	}
-
-	needsUpdate(){
-		this.mesh.__dirtyPosition = true;
 	}
 
 	reset() {
@@ -77,34 +95,9 @@ class Picker {
 	}
 }
 
-class Cube {
-	constructor(scene, width, velocity, color){
-		this.scene = scene;
-		this.width = width;
-		this.velocity = velocity;
-		this.points = 10;
-		this.color = color || 0x888888;
-
-		this.geometry = new THREE.CubeGeometry(width, 50, 100);
-		this.material = new THREE.MeshLambertMaterial({color: this.color});
-		this.mesh = new Physijs.BoxMesh(this.geometry, this.material);
-		this.position = this.mesh.position;
-		this.mesh.castShadow = true;
-	}
-
-	addToScene(){
-		this.scene.add(this.mesh);
-	}
-
-	updateVelocity(vel){
-		this.mesh.setLinearFactor(new THREE.Vector3(0, 0, vel));
-		this.mesh.setLinearVelocity(new THREE.Vector3(0, 0, vel));
-	}
-}
-
 class EnemyCube extends Cube {
-	constructor(scene, width, velocity){
-		super(scene, width, velocity, 0xf25346);
+	constructor(scene, size, velocity){
+		super(scene, size, 1, velocity, 0xf25346);
 	}
 }
 
@@ -203,6 +196,8 @@ class Game {
 		this.velocityStep = 100;
 		this.cubesColor = CUBES_COLOR;
 		this.cubesWidth = 100;
+		this.cubesHeight = 50;
+		this.cubesDepth = 100;
 		this.minCubesWidth = 20;
 		this.cubesWidthStep = 20;
 		this.cubesHeight = CUBES_HEIGHT;
@@ -211,6 +206,8 @@ class Game {
 		this.enemiesInterval = this.cubesInterval * 5;
 		this.enemiesColor = '';
 		this.enemiesWidth = 80;
+		this.enemiesHeight = 50;
+		this.enemiesDepth = 100;
 		this.scene = null;
 		this.renderer = null;
 		this.camera = null;
@@ -221,6 +218,33 @@ class Game {
 		this.roadColor = 0xeeeeee;
 		this.roadLength = 1500;
 		this.roadWidth = 600;
+	}
+
+	reset(){
+		this.state = 'Playing';
+		this.level = INITIAL_LEVEL;
+		this.score = INITIAL_SCORE;
+		this.lives = INITIAL_LIFES;
+
+		this.cubesInterval = CUBES_INTERVAL;
+		this.velocity = CUBES_VELOCITY;
+		this.cubesWidth = 100;
+		this.cubesHeight = 50;
+		this.cubesDepth = 100;
+		this.cubesHeight = CUBES_HEIGHT;
+		this.cubesDist = CUBES_DISTANCE;
+		this.cubesXScale = 1;
+		this.enemiesInterval = this.cubesInterval * 5;
+		this.enemiesColor = '';
+		this.enemiesWidth = 80;
+		this.enemiesHeight = 50;
+		this.enemiesDepth = 100;
+		if (this.cubesMap && this.cubesMap.size > 0) {
+			this.cubesMap.forEach(c => {
+				this.scene.remove(c.mesh);
+			});
+		}
+		this.cubesMap = new Map();
 	}
 
 	addSkyBox() {
@@ -284,7 +308,6 @@ class Game {
 
 	// eslint-disable-next-line no-unused-vars
 	onCubePicked(cubeMesh, relVelocity, relRotation, contactNormal){
-
 		this.particlesHolder.spawnParticles(
 			cubeMesh.position.clone(), 10, cubeMesh.material.color, .8);
 		this.scene.remove(cubeMesh);
@@ -298,43 +321,20 @@ class Game {
 				// set up a minimum interval for cubes
 				this.cubesInterval = Math.max(
 					this.cubesInterval - this.cubesIntervalStep, this.maxCubesInterval);
+				this.velocity = Math.min(
+					this.velocity + this.velocityStep, this.maxVelocity);
 			}
 			if (this.score % 100 === 0) {
 				this.shrinkCubes();
 			}
-			this.velocity = Math.min(
-				this.velocity + this.velocityStep, this.maxVelocity);
 		}
 		this.cubesMap.delete(cubeMesh);
-	}
-
-	reset(){
-		this.state = 'Playing';
-		this.level = INITIAL_LEVEL;
-		this.score = INITIAL_SCORE;
-		this.lives = INITIAL_LIFES;
-
-		this.cubesInterval = CUBES_INTERVAL;
-		this.velocity = CUBES_VELOCITY;
-		this.cubesWidth = 100;
-		this.cubesHeight = CUBES_HEIGHT;
-		this.cubesDist = CUBES_DISTANCE;
-		this.cubesXScale = 1;
-		this.enemiesInterval = this.cubesInterval * 5;
-		this.enemiesColor = '';
-		this.enemiesWidth = 80;
-		if (this.cubesMap && this.cubesMap.size > 0) {
-			this.cubesMap.forEach(c => {
-				this.scene.remove(c.mesh);
-			});
-		}
-		this.cubesMap = new Map();
 	}
 
 	initPicker() {
 		this.picker = new Picker(this.scene);
 		this.picker.position.y = CUBES_HEIGHT;
-		this.picker.position.z = 300;
+		this.picker.position.z = PICKER_Z_POSITION;
 		this.picker.addToScene();
 		this.picker.addEventListener('collision', this.onCubePicked.bind(this));
 	}
@@ -378,10 +378,6 @@ class Game {
 		this.light.shadow.camera.near = 0.5;       // default
 		this.light.shadow.camera.far = 500      // default
 
-		// TODO: Remove when axis helper is not needed
-		// let axisHelper = new THREE.AxisHelper(300);
-		// scene.add(axisHelper);
-
 		this.renderer = new THREE.WebGLRenderer({
 			alpha: 1,
 			antialias: true
@@ -408,7 +404,8 @@ class Game {
 			xPos = -xPos;
 		}
 		const cube = new Cube(
-			this.scene, this.cubesWidth, this.velocity, this.cubesColor);
+			this.scene, [this.cubesWidth, this.cubesHeight, this.cubesDepth],
+			1, this.velocity, this.cubesColor);
 		cube.position.set(xPos, this.cubesHeight, -this.cubesDist);
 		this.cubesMap.set(cube.mesh, cube);
 		cube.addToScene();
@@ -422,7 +419,8 @@ class Game {
 			xPos = -xPos;
 		}
 		const enemy = new EnemyCube(
-			this.scene, this.enemiesWidth, this.velocity, this.cubesColor);
+			this.scene, [this.enemiesWidth, this.enemiesHeight, this.enemiesDepth],
+			1, this.velocity);
 		enemy.position.set(xPos, this.cubesHeight, -this.cubesDist);
 		this.cubesMap.set(enemy.mesh, enemy);
 		enemy.addToScene();
