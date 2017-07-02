@@ -10,25 +10,32 @@ export default class Picker extends Component {
   update() {
     this.x += this.speedX;
     this.y += this.speedY;
-    if (window.fingerControls) {
-      const middle = Math.floor(this.game.width / 2);
-      // 12 is roughly the minimum distance between any finger tip a neighbour tip
-      // so 6 is the distance to the center point of the line that connects two
-      // finger tips
-      const centerDist = (window.fingerControls.mrDistance / 2 - 6);
+    const middle = Math.floor(this.game.width / 2);
+    this.movementLimit = Math.floor((this.game.width / 2) - this.width);
+
+    if (this.controlsType === 'Leap') {
+      const dist = this.controls.getFingersDistance(
+        'middleFinger', 'ringFinger');
+      if (!dist || !dist.distance) {
+        return;
+      }
+      // console.log('Dist object from controls', dist);
+      const distance = Math.floor(dist.distance);
+      const min = Math.max(Math.floor(dist.min), 12);
+      const max = Math.floor(dist.max);
+      // const moveFactor = dist.distance * this.movementLimit / dist.max;
+      const moveFactor = Math.floor((distance - min) * this.movementLimit / max);
       if (this.side === 'left') {
-        this.x = middle - this.width - (centerDist * this.distFactor);
+        this.x = middle - this.width - moveFactor;
       }
       if (this.side === 'right') {
-        this.x = middle + (centerDist * this.distFactor);
+        this.x = middle + moveFactor;
       }
     }
   }
 
-  draw() {
-    // this.context.restore();
-    this.context.fillStyle = this.color;
-    this.context.fillRect(this.x, this.y, this.width, this.height);
-    // this.context.restore();
+  enableLeapControls(){
+    this.controlsType = 'Leap';
+    this.controls = window.leapControls;
   }
 }

@@ -5,7 +5,7 @@ export default class Group {
   }
 
   update() {
-    for (var [id, c] of this.components) { // eslint-disable-line no-unused-vars
+    for (let [id, c] of this.components) { // eslint-disable-line no-unused-vars
       c.update();
       if (c.type === 'star' && ! c.collided) {
         if (c.crashWith(this.game.lPicker)) {
@@ -21,12 +21,15 @@ export default class Group {
       // TODO: create an animation to reflect that the user picker a star
       if (c.y > this.game.height || c.collided) {
         this.remove(c);
+        if (!c.collided) {
+          this.game.canvas.dispatchEvent(new Event('starMiss'));
+        }
       }
     }
   }
 
   draw() {
-    for (var [id, c] of this.components) { // eslint-disable-line no-unused-vars
+    for (let [id, c] of this.components) { // eslint-disable-line no-unused-vars
       c.draw();
     }
   }
@@ -38,6 +41,12 @@ export default class Group {
   remove(c) {
     c.alive = false;
     this.components.delete(c.id);
+  }
+
+  removeAll() {
+    for (let [id, c] of this.components) { // eslint-disable-line no-unused-vars
+      this.remove(c);
+    }
   }
 
   get length() {

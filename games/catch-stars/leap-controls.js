@@ -13,26 +13,44 @@ controller
   })
   .connect();
 
-function onFrame(frame) {
-	// TODO: Program frame filtering here
-	if (frame.hands && frame.hands.length === 1) {
-		// console.log(`Frame id: ${frame.id} hand: `, frame.hands[0]);
-		const capturedHand = frame.hands[0]; // eslint-disable-line
+let minDistance = 1000;
+let maxDistance = 0;
+function getFingersDistance(f1, f2) {
+  let output = {};
+  const frame = controller.frame();
+  if (frame.hands && frame.hands.length === 1) {
+		const capturedHand = frame.hands[0];
+    const fingerA = capturedHand[f1];
+    const fingerB = capturedHand[f2];
+    const middleVector = [fingerA.direction[0], fingerA.direction[2]];
+    const ringVector = [fingerB.direction[0], fingerB.direction[2]];
+
+    const dotProduct = Leap.glMatrix.vec2.dot(middleVector, ringVector);
+    const lengths = Leap.glMatrix.vec2.len(middleVector) * Leap.glMatrix.vec2.len(ringVector); // eslint-disable-line
+    const cosinus = dotProduct / lengths;
+    output.angle = Math.acos(cosinus) * 180 / Math.PI;
+
+    // console.log('Distance vars', fingerA.tipPosition[0], fingerB.tipPosition[0]);
+    const distance = Math.abs(fingerA.tipPosition[0] - fingerB.tipPosition[0]);
+    console.log('Distance ', distance);
+    if (distance > maxDistance) {
+      maxDistance = distance;
+    }
+    if (distance < minDistance) {
+      minDistance = distance;
+    }
+    output.distance = distance;
+    output.max = maxDistance;
+    output.min = minDistance;
 	}
+  return output;
 }
 
-controller.on('frame', onFrame);
+window.leapControls = {
+  getFingersDistance: getFingersDistance
+};
 
-const rot = document.getElementById('hand-rotation');
-const pitch = document.getElementById('hand-pitch');
-const mFingerAtt = document.getElementById('middle-tip');
-const rFingerAtt = document.getElementById('ring-tip');
-const mrDistance = document.getElementById('mr-distance');
-const mDirection = document.getElementById('middle-direction');
-const rDirection = document.getElementById('ring-direction');
-const angle = document.getElementById('angle');
-
-setInterval(() => {
+/*setInterval(() => {
   const frame = controller.frame();
   if (frame.hands && frame.hands.length === 1) {
 		const capturedHand = frame.hands[0];
@@ -60,10 +78,7 @@ setInterval(() => {
     window.fingerControls = {
       mrDistance: distance
     };
-
-    // console.log('Middle finger: ', capturedHand.middleFinger);
-    // console.log('Ring finger: ', capturedHand.ringFinger);
 	}else {
     window.fingerControls = null;
   }
-}, 200);
+}, 200);*/

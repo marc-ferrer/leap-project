@@ -29,8 +29,8 @@ export default class Component {
 
   draw() {
     this.context.save();
-    if (this.type === "text") {
-      this.context.font = this.width + " " + this.height;
+    if (this.type === 'text') {
+      this.context.font = this.width + ' ' + this.height;
       this.context.fillStyle = this.color;
       this.context.fillText(this.text, this.x, this.y);
     } else {
