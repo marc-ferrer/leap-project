@@ -1,7 +1,6 @@
 const controller = new Leap.Controller();
 window.controller = controller;
 const io = window.io;
-console.log('io', window.io);
 const socket = io('http://localhost:3000/cubes-road', {
   autoConnect: false
 });
@@ -28,13 +27,11 @@ export function getPosition(leftLimit, rightLimit) {
     const yawAngle = Math.acos(cos);
     if (handVector[0] > armVector[0]) {
       if (yawAngle > maxRightYaw) {
-        console.log('Updating max yaw angle to the right', yawAngle);
         maxRightYaw = yawAngle;
       }
       return yawAngle * rightLimit / maxRightYaw;
     }else {
       if (yawAngle > maxLeftYaw) {
-        console.log('Updating max yaw angle to the left', yawAngle);
         maxLeftYaw = yawAngle;
       }
       return yawAngle * leftLimit / maxLeftYaw;
