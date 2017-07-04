@@ -59,6 +59,7 @@
     pointLight.position = new THREE.Vector3(-20, 10, 0);
     pointLight.lookAt(new THREE.Vector3(0, 0, 0));
     scene.add(pointLight);
+
     camera = new THREE.PerspectiveCamera(
       45, window.innerWidth / viewHeight, 1, 3000);
     camera.position.fromArray([0, 160, 400]);
@@ -66,6 +67,7 @@
     window.controls = controls = new THREE.TrackballControls(
       camera, renderer.domElement);
     scene.add(camera);
+
     window.addEventListener('resize', function() {
       const viewHeight = window.innerHeight - CONTROLS_HEIGHT;
       camera.aspect = window.innerWidth / viewHeight;
@@ -77,60 +79,37 @@
     return renderer.render(scene, camera);
   };
 
-  // via Detector.js:
-  let webglAvailable  = (function () {
-    try {
-      const canvas = document.createElement( 'canvas' );
-      return !! window.WebGLRenderingContext &&
-        ( canvas.getContext( 'webgl' ) ||
-          canvas.getContext( 'experimental-webgl' ) );
-    }catch(e) {
-      return false;
-    }
-  })();
-
-  if (webglAvailable) {
-    initScene(document.getElementById('playback-renderer'));
-  }
+  initScene(document.getElementById('playback-renderer'));
 
   window.controller = controller = new Leap.Controller;
 
   toggleButton.addEventListener('click', function() {
     togglePlayback(player);
     togglePlayIcon(player, this);
-  })
+  });
 
   controller
-    .use('handHold')
     .use('transform', {
-      position: new THREE.Vector3(1, 0, 0)
+      position: new THREE.Vector3(0, -80, 0)
     })
-    .use('handEntry')
-    .use('screenPosition')
     .use('playback', {
       recording: './leap-output.json',
-      requiredProtocolVersion: 6,
-      pauseOnHand: true,
+      pauseOnHand: false,
       loop: false
     })
     .use('riggedHand', {
       parent: scene,
-      renderer: renderer,
-      // scale: 1.5,
-      positionScale: 0.5,
       helper: true,
-      offset: new THREE.Vector3(0, 0, 0),
       renderFn: function() {
         renderer.render(scene, camera);
-        return controls.update();
+        controls.update();
       },
-      materialOptions: {
+      /*materialOptions: {
         // wireframe: getParam('wireframe'),
         color: new THREE.Color(0x333333)
-      },
+      },*/
       // dotsMode: true,
-      camera: camera,
-      checkWebGL: true
+      camera: camera
     }).connect();
 
   const player = controller.plugins['playback'].player
