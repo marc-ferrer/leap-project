@@ -58,7 +58,6 @@ class PhaserGame {
     this.world.resize(WIDTH * 2, HEIGHT);
     this.resetGame();
     let self = this;
-    console.log('INIT state called');
     this.state.add('Over', {
       create: function() {
         this.spacebar = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
@@ -90,8 +89,7 @@ class PhaserGame {
   }
 
   create () {
-    console.log('Create stage called');
-    //  We're going to be using physics, so enable the Arcade Physics system
+    //  Enable the Arcade Physics system
     this.physics.startSystem(Phaser.Physics.ARCADE);
 
     // Add background graphics
@@ -179,16 +177,12 @@ class PhaserGame {
 
   enableHandControlls() {
     window.addEventListener('handUp', () => {
-      console.log('Hand Up event received');
-      // let hitPlatform = this.physics.arcade.collide(this.player, this.platforms);
-      // TODO: hitPlatform is never evaluated as true here, why?
       if (this.player.body.touching.down) {
         this.player.body.velocity.y = -350;
       }
     });
 
     window.addEventListener('handDown', () => {
-      console.log('Hand down event received');
       this.player.body.velocity.x = 0;
     });
   }
@@ -243,9 +237,7 @@ class PhaserGame {
     }
   }
 
-  onObstacleCollision(obstacle){
-    console.log('Player collided with an obstacle', obstacle);
-    // maybe we should end the leap control streaming session and start again
+  onObstacleCollision(){
     this.state.start('Over');
   }
 }
