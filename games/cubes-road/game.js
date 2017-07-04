@@ -66,6 +66,7 @@ class Picker extends Cube{
 	constructor(scene) {
 		super(scene, [120, 40, 100], 0, 0, 0x11ff11);
 		this.mesh.receiveShadow = false;
+		this.xScale = 1;
 
 		this.mesh.setLinearFactor(new THREE.Vector3(0, 0, 0));
 		this.mesh.setLinearVelocity(new THREE.Vector3(0, 0, 0));
